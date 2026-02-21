@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What is VAT? A Complete Beginner's Guide — VATCalc</title>
+<meta name="description" content="Learn what VAT (Value Added Tax) is, how it works, who pays it, and how to calculate it. Includes formulas, examples, and a comparison with US Sales Tax.">
+<link rel="canonical" href="https://vatcalc.net/blog/what-is-vat.html">
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0057FF;--primary-dark:#0040CC;--primary-light:#EBF1FF;--accent:#00C896;--accent-light:#E6FBF5;--dark:#0A0F1E;--text:#1A2340;--muted:#6B7A99;--border:#E2E8F4;--bg:#F7F9FE;--white:#ffffff;--shadow-sm:0 2px 8px rgba(0,87,255,0.08);--shadow-md:0 8px 32px rgba(0,87,255,0.12);--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1A2340;font-size:15px;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;}
+.nav-links{display:flex;gap:8px;align-items:center;}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary);}
+.nav-cta{background:var(--primary);color:white!important;padding:9px 18px!important;border-radius:9px!important;box-shadow:0 3px 10px rgba(0,87,255,0.25);}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:#1A2340;border-radius:2px;}
+@media(max-width:680px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px;box-shadow:var(--shadow-md);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+.page-hero{background:linear-gradient(135deg,#0057FF,#0040CC);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);border-radius:50%;}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;color:white;margin-bottom:10px;position:relative;z-index:1;letter-spacing:-1px;}
+.page-hero p{color:rgba(255,255,255,0.8);font-size:16px;max-width:520px;margin:0 auto;position:relative;z-index:1;}
+.main{max-width:900px;margin:0 auto;padding:52px 20px 80px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin:28px 0 10px;}
+h2:first-child{margin-top:0;}
+h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin:20px 0 8px;}
+p{margin-bottom:14px;color:#1A2340;line-height:1.75;}
+ul,ol{padding-left:22px;margin-bottom:14px;}
+li{margin-bottom:6px;line-height:1.7;color:#1A2340;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:#1A2340;background:var(--white);transition:border-color 0.2s;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,87,255,0.1);}
+.field textarea{resize:vertical;min-height:120px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--primary);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;transition:all 0.2s;text-decoration:none;box-shadow:0 4px 14px rgba(0,87,255,0.3);}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.info-box{background:var(--accent-light);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;display:flex;gap:12px;}
+.info-box .icon{font-size:18px;flex-shrink:0;}
+.info-box p{margin:0;font-size:14px;color:#0A7A5A;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}}
+.tag{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;margin-top:0;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.4);}
+.footer-links a:hover{color:white;}
+.last-updated{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;font-size:13px;color:var(--muted);margin-bottom:24px;display:inline-flex;align-items:center;gap:6px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-icon">%</div>VATCalc</a>
+    <div class="nav-links" id="navLinks"><a href="/">Home</a>
+<a href="/vat-calculator.html">Calculator</a>
+<a href="/blog.html" class="active">Blog</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+<a href="/vat-calculator.html" class="nav-cta">Try Calculator →</a></div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="page-hero">
+  <h1>What is VAT?</h1>
+  <p>A complete guide to Value Added Tax — how it works, who pays it, and how to calculate it.</p>
+</div>
+<div class="main">
+<div style="margin-bottom:24px;">
+  <a href="/blog.html" style="color:var(--primary);font-size:14px;">← Back to All Guides</a>
+</div>
+
+<div class="card">
+<div class="tag">VAT Basics</div>
+<h2 style="margin-top:0;">What is VAT? A Complete Beginner's Guide</h2>
+<div style="color:var(--muted);font-size:13px;margin-bottom:20px;">📅 January 2025 · ⏱ 5 min read · ✍️ VATCalc Team</div>
+
+<p><strong>Value Added Tax (VAT)</strong> is a consumption tax applied to goods and services at every stage of the supply chain — from manufacturing to the final sale to consumers. It is one of the most widely used tax systems in the world, applied in over 160 countries.</p>
+
+<p>Despite being called different names — GST in Australia, Canada and India, IVA in Spain and Mexico, TVA in France, MwSt in Germany — the underlying mechanism is the same: tax is collected at each stage of production and distribution, but only the final consumer bears the full cost.</p>
+
+<h2>How Does VAT Work?</h2>
+<p>The key feature of VAT is that each business in the supply chain collects tax from its customers but can reclaim the VAT it paid to its own suppliers. This is called the <strong>input tax credit</strong> system. Here's a simple example:</p>
+
+<ul>
+  <li><strong>Manufacturer</strong> sells goods to a wholesaler for €100 + €20 VAT (20%). The manufacturer pays €20 to the government.</li>
+  <li><strong>Wholesaler</strong> sells to a retailer for €150 + €30 VAT. The wholesaler reclaims the €20 already paid and pays €10 net to the government.</li>
+  <li><strong>Retailer</strong> sells to a customer for €200 + €40 VAT. The retailer reclaims the €30 paid to the wholesaler and pays €10 net to the government.</li>
+  <li><strong>Total VAT collected</strong> by the government = €20 + €10 + €10 = €40 (which is exactly 20% of the final €200 selling price).</li>
+</ul>
+
+<p>The end consumer pays €240 total, and the government receives €40 VAT. Every business in the chain acts as a tax collector for the government.</p>
+
+<h2>How to Calculate VAT</h2>
+<h3>Adding VAT to a Price</h3>
+<p>If you have a price <em>without</em> VAT (net price) and want to find the total price including VAT:</p>
+<p style="background:var(--bg);border-radius:10px;padding:14px 18px;font-family:monospace;"><strong>Total = Net Price × (1 + VAT Rate)</strong><br>Example: €100 × (1 + 0.20) = €120</p>
+
+<h3>Removing VAT from a Price</h3>
+<p>If you have a price <em>including</em> VAT (gross price) and want to find the net price:</p>
+<p style="background:var(--bg);border-radius:10px;padding:14px 18px;font-family:monospace;"><strong>Net Price = Gross Price ÷ (1 + VAT Rate)</strong><br>Example: €120 ÷ (1 + 0.20) = €100</p>
+
+<h3>Finding the VAT Amount</h3>
+<p style="background:var(--bg);border-radius:10px;padding:14px 18px;font-family:monospace;"><strong>VAT Amount = Gross Price − Net Price</strong><br>Example: €120 − €100 = €20</p>
+
+<div class="info-box"><span class="icon">💡</span><p>Use our <a href="/vat-calculator.html" style="color:#0A7A5A;font-weight:600;">free VAT calculator</a> to do all these calculations instantly for any country with the correct rate applied automatically.</p></div>
+
+<h2>VAT Rates — Standard, Reduced and Zero</h2>
+<p>Most countries with VAT operate multiple rates:</p>
+
+<h3>Standard Rate</h3>
+<p>The main rate that applies to most goods and services. Common rates: EU average around 21%, UK 20%, Australia 10%, Japan 10%, USA varies by state.</p>
+
+<h3>Reduced Rate</h3>
+<p>A lower rate applied to specific goods considered essential or beneficial to society. For example, food, books, medicine, children's items, and energy often attract lower VAT rates to make them more affordable.</p>
+
+<h3>Zero Rate (0%)</h3>
+<p>Some goods are "zero-rated" — VAT applies at 0%, meaning no tax is charged but businesses can still reclaim input VAT. Common zero-rated items include exports, basic food staples in the UK, and children's clothing in Ireland.</p>
+
+<h3>Exempt</h3>
+<p>Some services are "exempt" from VAT altogether, such as healthcare, education and financial services in many countries. Unlike zero-rating, exempt businesses cannot reclaim input VAT.</p>
+
+<h2>Who Pays VAT?</h2>
+<p>Technically, businesses collect and pay VAT to the government. But economically, the final consumer bears the cost because VAT is included in the price they pay. VAT-registered businesses act as unpaid tax collectors for the government.</p>
+
+<h3>When Do Businesses Need to Register for VAT?</h3>
+<p>Most countries require businesses to register for VAT once their annual turnover exceeds a threshold, for example:</p>
+<ul>
+  <li><strong>UK:</strong> £90,000 (as of 2024)</li>
+  <li><strong>Germany:</strong> €22,000</li>
+  <li><strong>France:</strong> €36,800 (services) / €91,900 (goods)</li>
+  <li><strong>Australia:</strong> AUD 75,000</li>
+</ul>
+<p>Below the threshold, you may register voluntarily. Above it, registration is mandatory.</p>
+
+<h2>VAT vs Sales Tax (USA)</h2>
+<p>The United States uses Sales Tax rather than VAT. The key differences are:</p>
+<ul>
+  <li><strong>Collection point:</strong> US Sales Tax is only collected at the final point of sale. VAT is collected at every stage.</li>
+  <li><strong>Who sees it:</strong> Sales Tax is added at checkout. In many countries, VAT is already included in displayed prices.</li>
+  <li><strong>Rate variation:</strong> US Sales Tax varies by state, county and city — sometimes giving 15,000+ different rates. VAT rates are set at the national level.</li>
+  <li><strong>B2B treatment:</strong> B2B sales with a resale certificate are Sales Tax exempt. With VAT, businesses pay then reclaim via input tax credits.</li>
+</ul>
+
+<h2>Summary</h2>
+<ul>
+  <li>VAT is a consumption tax collected at every stage of the supply chain</li>
+  <li>The end consumer bears the full cost; businesses reclaim VAT they paid to suppliers</li>
+  <li>Most countries have multiple VAT rates: standard, reduced, and zero</li>
+  <li>To add VAT: multiply net price by (1 + rate). To remove: divide gross by (1 + rate)</li>
+  <li>Businesses must register for VAT once they exceed a turnover threshold</li>
+</ul>
+
+<div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border);">
+  <a href="/vat-calculator.html" class="btn-primary">🧮 Try the Free VAT Calculator →</a>
+</div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+  <a href="/blog/how-to-calculate-vat.html" style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:block;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Next Article</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--dark);">How to Calculate VAT — Step by Step →</div>
+  </a>
+  <a href="/blog/eu-vat-rates.html" style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:block;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Related</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--dark);">EU VAT Rates 2025 — All 27 Countries →</div>
+  </a>
+</div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2025 VATCalc. All rights reserved. Free VAT calculator for 150+ countries. For informational purposes only.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
