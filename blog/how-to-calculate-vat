@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Calculate VAT — Step by Step with Examples | VATCalc</title>
+<meta name="description" content="Learn how to calculate VAT correctly. Simple formulas to add VAT, remove VAT, and find the VAT component in a price. Includes worked examples and a quick reference table.">
+<link rel="canonical" href="https://vatcalc.net/blog/how-to-calculate-vat.html">
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0057FF;--primary-dark:#0040CC;--primary-light:#EBF1FF;--accent:#00C896;--accent-light:#E6FBF5;--dark:#0A0F1E;--text:#1A2340;--muted:#6B7A99;--border:#E2E8F4;--bg:#F7F9FE;--white:#ffffff;--shadow-sm:0 2px 8px rgba(0,87,255,0.08);--shadow-md:0 8px 32px rgba(0,87,255,0.12);--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1A2340;font-size:15px;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;}
+.nav-links{display:flex;gap:8px;align-items:center;}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary);}
+.nav-cta{background:var(--primary);color:white!important;padding:9px 18px!important;border-radius:9px!important;box-shadow:0 3px 10px rgba(0,87,255,0.25);}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:#1A2340;border-radius:2px;}
+@media(max-width:680px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px;box-shadow:var(--shadow-md);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+.page-hero{background:linear-gradient(135deg,#0057FF,#0040CC);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);border-radius:50%;}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;color:white;margin-bottom:10px;position:relative;z-index:1;letter-spacing:-1px;}
+.page-hero p{color:rgba(255,255,255,0.8);font-size:16px;max-width:520px;margin:0 auto;position:relative;z-index:1;}
+.main{max-width:900px;margin:0 auto;padding:52px 20px 80px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin:28px 0 10px;}
+h2:first-child{margin-top:0;}
+h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin:20px 0 8px;}
+p{margin-bottom:14px;color:#1A2340;line-height:1.75;}
+ul,ol{padding-left:22px;margin-bottom:14px;}
+li{margin-bottom:6px;line-height:1.7;color:#1A2340;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:#1A2340;background:var(--white);transition:border-color 0.2s;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,87,255,0.1);}
+.field textarea{resize:vertical;min-height:120px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--primary);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;transition:all 0.2s;text-decoration:none;box-shadow:0 4px 14px rgba(0,87,255,0.3);}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.info-box{background:var(--accent-light);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;display:flex;gap:12px;}
+.info-box .icon{font-size:18px;flex-shrink:0;}
+.info-box p{margin:0;font-size:14px;color:#0A7A5A;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}}
+.tag{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;margin-top:0;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.4);}
+.footer-links a:hover{color:white;}
+.last-updated{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;font-size:13px;color:var(--muted);margin-bottom:24px;display:inline-flex;align-items:center;gap:6px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-icon">%</div>VATCalc</a>
+    <div class="nav-links" id="navLinks"><a href="/">Home</a>
+<a href="/vat-calculator.html">Calculator</a>
+<a href="/blog.html" class="active">Blog</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+<a href="/vat-calculator.html" class="nav-cta">Try Calculator →</a></div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="page-hero">
+  <h1>How to Calculate VAT</h1>
+  <p>Simple formulas and worked examples for adding, removing, and checking VAT.</p>
+</div>
+<div class="main">
+<div style="margin-bottom:24px;">
+  <a href="/blog.html" style="color:var(--primary);font-size:14px;">← Back to All Guides</a>
+</div>
+<div class="card">
+<div class="tag">How To</div>
+<h2 style="margin-top:0;">How to Calculate VAT — Step by Step with Examples</h2>
+<div style="color:var(--muted);font-size:13px;margin-bottom:20px;">📅 February 2025 · ⏱ 4 min read · ✍️ VATCalc Team</div>
+
+<p>Calculating VAT correctly is essential for any business or freelancer issuing invoices. Whether you need to add VAT to a price, remove it, or find the VAT component within a total, the maths is simple once you understand the formulas.</p>
+
+<h2>The Three VAT Calculations You Need</h2>
+
+<h3>1. Adding VAT to a Net Price</h3>
+<p>Use this when you know the price <em>before</em> VAT and want to find the total price the customer pays.</p>
+<p style="background:var(--bg);border-radius:10px;padding:16px 20px;font-family:monospace;line-height:1.9;"><strong>VAT Amount = Net Price × VAT Rate</strong><br><strong>Total Price = Net Price + VAT Amount</strong><br><br>— OR in one step —<br><br><strong>Total Price = Net Price × (1 + VAT Rate)</strong></p>
+<p><strong>Example at 20% VAT:</strong> Net price is €250.<br>VAT Amount = €250 × 0.20 = <strong>€50</strong><br>Total (inc. VAT) = €250 + €50 = <strong>€300</strong></p>
+<p><strong>Example at 5% VAT:</strong> Net price is £80.<br>Total = £80 × 1.05 = <strong>£84</strong></p>
+
+<h3>2. Removing VAT from a Gross Price</h3>
+<p>Use this when you have a price <em>including</em> VAT and want to find the net price. This is sometimes called "backing out" or "reverse calculating" VAT.</p>
+<p style="background:var(--bg);border-radius:10px;padding:16px 20px;font-family:monospace;line-height:1.9;"><strong>Net Price = Gross Price ÷ (1 + VAT Rate)</strong><br><strong>VAT Amount = Gross Price − Net Price</strong></p>
+<p><strong>Example at 21% VAT:</strong> Total price is €363.<br>Net Price = €363 ÷ 1.21 = <strong>€300</strong><br>VAT Amount = €363 − €300 = <strong>€63</strong></p>
+<p><strong>⚠️ Common mistake:</strong> Don't simply multiply by 20% to find the VAT in a price that includes VAT. That gives the wrong answer. Always divide by (1 + rate).</p>
+
+<h3>3. Finding the VAT Rate from Two Known Prices</h3>
+<p style="background:var(--bg);border-radius:10px;padding:16px 20px;font-family:monospace;line-height:1.9;"><strong>VAT Rate = (Gross ÷ Net) − 1</strong></p>
+<p><strong>Example:</strong> Net price €200, gross price €240.<br>Rate = (€240 ÷ €200) − 1 = 1.20 − 1 = 0.20 = <strong>20%</strong></p>
+
+<h2>Quick Reference: Common VAT Rates</h2>
+<div style="overflow-x:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+<thead><tr style="background:var(--dark);color:white;"><th style="padding:10px 14px;text-align:left;">Net Price</th><th style="padding:10px 14px;text-align:center;">5% VAT</th><th style="padding:10px 14px;text-align:center;">7% VAT</th><th style="padding:10px 14px;text-align:center;">10% VAT</th><th style="padding:10px 14px;text-align:center;">15% VAT</th><th style="padding:10px 14px;text-align:center;">20% VAT</th><th style="padding:10px 14px;text-align:center;">21% VAT</th><th style="padding:10px 14px;text-align:center;">25% VAT</th></tr></thead>
+<tbody><tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+  <td style="padding:10px 14px;font-weight:600;">€50</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€52</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€54</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€55</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€57</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€60</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€60</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€62</td></tr><tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:10px 14px;font-weight:600;">€100</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€105</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€107</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€110</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€115</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€120</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€121</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€125</td></tr><tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+  <td style="padding:10px 14px;font-weight:600;">€150</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€158</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€160</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€165</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€172</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€180</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€182</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€188</td></tr><tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:10px 14px;font-weight:600;">€200</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€210</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€214</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€220</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€230</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€240</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€242</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€250</td></tr><tr style="border-bottom:1px solid var(--border);background:var(--bg)">
+  <td style="padding:10px 14px;font-weight:600;">€500</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€525</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€535</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€550</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€575</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€600</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€605</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€625</td></tr><tr style="border-bottom:1px solid var(--border);">
+  <td style="padding:10px 14px;font-weight:600;">€1000</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1050</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1070</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1100</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1150</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1200</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1210</td><td style="padding:10px 14px;text-align:center;color:var(--muted);">€1250</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>VAT Calculation with Reduced Rates</h2>
+<p>Many items have reduced VAT rates. Always check the correct rate for your specific product and country. For example:</p>
+<ul>
+  <li>Food in Germany: 7% (not 19%)</li>
+  <li>Books in France: 5.5% (not 20%)</li>
+  <li>Medicine in Spain: 4% (not 21%)</li>
+  <li>Energy in the UK: 5% (not 20%)</li>
+</ul>
+<p>Applying the wrong rate is one of the most common VAT errors. Use our <a href="/vat-calculator.html" style="color:var(--primary);">category-aware VAT calculator</a> to always get the right rate.</p>
+
+<div class="info-box"><span class="icon">⚡</span><p>Rather than calculating manually, use our <a href="/vat-calculator.html" style="color:#0A7A5A;font-weight:600;">free VAT calculator</a> — select your country and product category, enter your amount, and get instant results with the correct rate applied.</p></div>
+
+<div style="margin-top:28px;padding-top:24px;border-top:1px solid var(--border);">
+  <a href="/vat-calculator.html" class="btn-primary">🧮 Calculate VAT Instantly →</a>
+</div>
+</div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2025 VATCalc. All rights reserved. Free VAT calculator for 150+ countries. For informational purposes only.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
