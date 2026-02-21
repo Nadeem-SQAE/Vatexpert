@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VAT & Sales Tax Calculator — 150+ Countries | Free Online Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #0057FF;
+    --primary-dark: #0040CC;
+    --primary-light: #EBF1FF;
+    --accent: #00C896;
+    --accent-light: #E6FBF5;
+    --dark: #0A0F1E;
+    --text: #1A2340;
+    --muted: #6B7A99;
+    --border: #E2E8F4;
+    --bg: #F7F9FE;
+    --white: #ffffff;
+    --danger: #FF3B5C;
+    --warning: #FF9500;
+    --shadow-sm: 0 2px 8px rgba(0,87,255,0.08);
+    --shadow-md: 0 8px 32px rgba(0,87,255,0.12);
+    --shadow-lg: 0 20px 60px rgba(0,87,255,0.15);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: var(--primary);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 16px;
+  }
+  .badge {
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0057FF 0%, #0040CC 50%, #002899 100%);
+    padding: 52px 24px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,200,150,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+    letter-spacing: -1px;
+  }
+  .hero p {
+    color: rgba(255,255,255,0.8);
+    font-size: 16px;
+    max-width: 500px;
+    margin: 0 auto 24px;
+    position: relative; z-index: 1;
+    font-weight: 300;
+  }
+  .hero-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .pill {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex; align-items: center; gap: 5px;
+  }
+
+  /* MAIN LAYOUT */
+  .main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 20px 60px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px;
+    gap: 4px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .tab {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .tab.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,87,255,0.25);
+  }
+  .tab:hover:not(.active) {
+    background: var(--primary-light);
+    color: var(--primary);
+  }
+
+  /* PANELS */
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  /* GRID */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .tab span.tab-label { display: none; }
+  }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    background: var(--primary-light);
+  }
+
+  /* FORM */
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-bottom: 6px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7A99' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+  .field input:focus, .field select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0,87,255,0.1);
+  }
+  .field input::placeholder { color: #BCC5D9; }
+
+  /* TOGGLE */
+  .toggle-group {
+    display: flex;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    gap: 4px;
+    margin-bottom: 18px;
+  }
+  .toggle-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .toggle-btn.active {
+    background: var(--white);
+    color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0,87,255,0.12);
+    font-weight: 600;
+  }
+
+  /* RATE PILLS */
+  .rate-display {
+    background: var(--primary-light);
+    border: 1px solid rgba(0,87,255,0.15);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    margin-bottom: 18px;
+  }
+  .rate-display-title {
+    font-size: 12px;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .rate-pills-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .rate-pill-btn {
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .rate-pill-btn.selected {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 3px 10px rgba(0,87,255,0.25);
+  }
+  .rate-pill-btn:hover:not(.selected) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+
+  /* RESULT BOX */
+  .result-box {
+    background: linear-gradient(135deg, #0057FF, #0040CC);
+    border-radius: var(--radius);
+    padding: 28px;
+    color: white;
+    margin-top: 8px;
+  }
+  .result-box-title {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+  }
+  .result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-label { font-size: 14px; opacity: 0.8; }
+  .result-value { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; }
+  .result-total .result-label { font-size: 15px; opacity: 1; font-weight: 600; }
+  .result-total .result-value { font-size: 28px; color: #7DFFCB; }
+
+  /* BTN */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0,87,255,0.3);
+  }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,87,255,0.35); }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+  .btn-accent {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0,200,150,0.3);
+  }
+  .btn-accent:hover { background: #00B085; transform: translateY(-1px); }
+  .btn-sm { padding: 9px 16px; font-size: 13px; }
+  .btn-full { width: 100%; }
+  .btn-group { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+
+  /* PLACEHOLDER RESULT */
+  .placeholder-result {
+    background: var(--bg);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--muted);
+  }
+  .placeholder-result .icon { font-size: 40px; margin-bottom: 12px; }
+  .placeholder-result p { font-size: 14px; }
+
+  /* INFO BOX */
+  .info-box {
+    background: var(--accent-light);
+    border: 1px solid rgba(0,200,150,0.2);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 16px;
+  }
+  .info-box .info-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .info-box p { font-size: 13px; color: #0A7A5A; line-height: 1.5; }
+
+  /* INVOICE PANEL */
+  .invoice-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+  }
+  .invoice-section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 600px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-2-3 { grid-template-columns: 1fr; }
+  }
+  .grid-2-3 {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+  }
+
+  /* LINE ITEMS */
+  .line-items-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 40px;
+    gap: 8px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .line-items-header span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+  .line-item-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 40px;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .line-item-row input, .line-item-row select {
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--white);
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .line-item-row input:focus, .line-item-row select:focus {
+    outline: none;
+    border-color: var(--primary);
+  }
+  .line-item-row .line-total {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--primary);
+    text-align: right;
+    padding-right: 4px;
+  }
+  .remove-line {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    transition: all 0.2s;
+    font-size: 16px;
+  }
+  .remove-line:hover { border-color: var(--danger); color: var(--danger); background: #FFF0F3; }
+
+  @media (max-width: 640px) {
+    .line-items-header { display: none; }
+    .line-item-row {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 12px;
+      gap: 8px;
+    }
+    .line-item-row input:first-child { grid-column: 1 / -1; }
+    .line-item-row .line-total { text-align: left; }
+  }
+
+  /* INVOICE TOTALS */
+  .invoice-totals {
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 20px;
+    margin-top: 16px;
+  }
+  .totals-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .totals-row:last-child { border-bottom: none; }
+  .totals-row.grand-total {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--primary);
+    padding-top: 14px;
+    border-top: 2px solid var(--primary);
+    margin-top: 4px;
+  }
+  .totals-label { color: var(--muted); }
+  .totals-value { font-weight: 500; }
+
+  /* PRINT PREVIEW */
+  .preview-invoice {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    margin-top: 24px;
+    display: none;
+  }
+  .preview-invoice.show { display: block; }
+  .invoice-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  .invoice-company-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+  .invoice-meta {
+    text-align: right;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .invoice-title-tag {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -1px;
+    margin-bottom: 32px;
+  }
+  .invoice-parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+  }
+  .party-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .party-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .party-detail { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+  .invoice-table th {
+    background: var(--dark);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+  }
+  .invoice-table th:last-child { text-align: right; }
+  .invoice-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .invoice-table td:last-child { text-align: right; font-weight: 500; }
+  .invoice-table tr:last-child td { border-bottom: none; }
+  .invoice-totals-preview {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .invoice-totals-preview table {
+    min-width: 280px;
+    font-size: 14px;
+  }
+  .invoice-totals-preview td { padding: 6px 12px; }
+  .invoice-totals-preview td:last-child { text-align: right; font-weight: 500; }
+  .invoice-grand-total {
+    background: var(--primary);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+  .invoice-grand-total td { padding: 12px; }
+  .invoice-footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .invoice-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  /* HOW IT WORKS SECTION */
+  .how-section {
+    margin-top: 60px;
+    padding: 0 4px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin-bottom: 32px;
+    font-size: 15px;
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .step-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .step-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .step-num {
+    width: 40px; height: 40px;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: var(--dark);
+  }
+  .step-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* FAQ */
+  .faq-section { margin-top: 60px; }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%;
+    padding: 18px 20px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: var(--bg); }
+  .faq-q.open { color: var(--primary); }
+  .faq-chevron { font-size: 12px; transition: transform 0.2s; flex-shrink: 0; }
+  .faq-q.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    display: none;
+    padding: 0 20px 18px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+  .faq-a.show { display: block; }
+
+  /* COUNTRIES TABLE */
+  .countries-section { margin-top: 60px; }
+  .countries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .country-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .country-card:hover { border-color: var(--primary); background: var(--primary-light); }
+  .country-flag { font-size: 22px; }
+  .country-info { flex: 1; min-width: 0; }
+  .country-name { font-size: 13px; font-weight: 500; color: var(--text); }
+  .country-rate { font-size: 12px; color: var(--muted); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.6);
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 80px;
+  }
+  footer strong { color: white; font-family: 'Syne', sans-serif; }
+  .footer-links { display: flex; gap: 24px; justify-content: center; margin-top: 12px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; }
+  .footer-links a:hover { color: white; }
+  .footer-disclaimer { margin-top: 16px; font-size: 11px; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.5; }
+
+  @media print {
+    .header, .hero, .tabs, .how-section, .faq-section, .countries-section, footer,
+    .invoice-actions, #calcPanel, #categoryPanel { display: none !important; }
+    .preview-invoice { display: block !important; box-shadow: none; border: none; }
+    body { background: white; }
+    .main { padding: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">%</div>
+      VATCalc
+    </a>
+    <span class="badge">✓ Free Tool</span>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Global VAT Calculator + Invoice Generator</h1>
+  <p>Calculate VAT/GST/Sales Tax for 150+ countries by product category. Free for businesses and individuals.</p>
+  <div class="hero-pills">
+    <span class="pill">🌍 150+ Countries</span>
+    <span class="pill">📂 Product Categories</span>
+    <span class="pill">🏢 Business & Individual</span>
+    <span class="pill">🧾 Invoice Generator</span>
+    <span class="pill">🖨️ Print & Share</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('calc')" id="tab-calc">
+      🧮 <span class="tab-label">VAT Calculator</span>
+    </button>
+    <button class="tab" onclick="switchTab('category')" id="tab-category">
+      📂 <span class="tab-label">By Category</span>
+    </button>
+    <button class="tab" onclick="switchTab('invoice')" id="tab-invoice">
+      🧾 <span class="tab-label">Invoice Generator</span>
+    </button>
+  </div>
+
+  <!-- PANEL 1: VAT CALCULATOR -->
+  <div class="panel active" id="calcPanel">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <div class="card-title">
+            <div class="card-title-icon">🌍</div>
+            Calculator Settings
+          </div>
+
+          <!-- USER TYPE -->
+          <label style="font-size:13px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px;display:block;margin-bottom:8px;">I am a...</label>
+          <div class="toggle-group">
+            <button class="toggle-btn active" onclick="setUserType('business', this)">🏢 Business (B2B)</button>
+            <button class="toggle-btn" onclick="setUserType('individual', this)">👤 Individual</button>
+          </div>
+
+          <!-- COUNTRY -->
+          <div class="field">
+            <label>Country</label>
+            <select id="countrySelect" onchange="onCountryChange()">
+              <option value="">— Select Country —</option>
+            </select>
+          </div>
+
+          <!-- SPECIAL COUNTRY NOTE -->
+          <div id="specialNote" class="info-box" style="display:none;margin-bottom:16px;">
+            <span class="info-icon">ℹ️</span>
+            <p id="specialNoteText"></p>
+          </div>
+
+          <!-- USA STATE SELECTOR -->
+          <div class="field" id="usaStateField" style="display:none;">
+            <label>State (for exact Sales Tax rate)</label>
+            <select id="usaStateSelect" onchange="onStateChange()">
+              <option value="">— Select State (optional) —</option>
+            </select>
+          </div>
+
+          <!-- VAT RATES -->
+          <div id="rateDisplay" class="rate-display" style="display:none;">
+            <div class="rate-display-title" id="rateDisplayTitle">Available Rates</div>
+            <div class="rate-pills-row" id="ratePills"></div>
+          </div>
+
+          <!-- AMOUNT -->
+          <div class="field">
+            <label>Amount</label>
+            <input type="number" id="amountInput" placeholder="Enter amount..." min="0" step="0.01" oninput="calculate()">
+          </div>
+
+          <!-- DIRECTION -->
+          <div class="toggle-group">
+            <button class="toggle-btn active" onclick="setDirection('add', this)">➕ Add Tax</button>
+            <button class="toggle-btn" onclick="setDirection('remove', this)">➖ Remove Tax</button>
+          </div>
+
+          <button class="btn btn-primary btn-full" onclick="calculate()">
+            ⚡ Calculate
+          </button>
+        </div>
+      </div>
+
+      <!-- RESULT -->
+      <div>
+        <div id="resultPlaceholder" class="placeholder-result">
+          <div class="icon">💡</div>
+          <p><strong>Select a country</strong> and enter an amount<br>to calculate VAT instantly</p>
+        </div>
+        <div id="resultBox" style="display:none;">
+          <div class="result-box">
+            <div class="result-box-title">Calculation Result</div>
+            <div class="result-row">
+              <span class="result-label">Net Amount (excl. VAT)</span>
+              <span class="result-value" id="res-net">—</span>
+            </div>
+            <div class="result-row">
+              <span class="result-label" id="res-rate-label">VAT Amount</span>
+              <span class="result-value" id="res-vat">—</span>
+            </div>
+            <div class="result-row result-total">
+              <span class="result-label">Total (incl. VAT)</span>
+              <span class="result-value" id="res-total">—</span>
+            </div>
+          </div>
+          <div id="b2bNote" class="info-box" style="display:none;">
+            <span class="info-icon">ℹ️</span>
+            <p id="b2bNoteText"><strong>B2B Reverse Charge:</strong> If your customer is VAT-registered in another EU country, reverse charge rules may apply — the buyer accounts for VAT instead of you.</p>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-outline btn-sm" onclick="switchTab('invoice'); prefillInvoice()">🧾 Create Invoice</button>
+            <button class="btn btn-outline btn-sm" onclick="copyResult()">📋 Copy Result</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 2: BY CATEGORY -->
+  <div class="panel" id="categoryPanel">
+    <div class="grid-2">
+      <div>
+        <div class="card">
+          <div class="card-title">
+            <div class="card-title-icon">📂</div>
+            Find Rate by Product
+          </div>
+
+          <div class="field">
+            <label>Country</label>
+            <select id="catCountrySelect" onchange="onCatCountryChange()">
+              <option value="">— Select Country —</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Product Category</label>
+            <select id="categorySelect" onchange="onCategoryChange()" disabled>
+              <option value="">— Select Category —</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Search Product Name</label>
+            <input type="text" id="productSearch" placeholder="e.g. bread, laptop, medicine..." oninput="searchProduct()" disabled>
+          </div>
+
+          <div id="productResults" style="margin-top:8px;"></div>
+
+          <div class="field" style="margin-top:8px;">
+            <label>Amount</label>
+            <input type="number" id="catAmount" placeholder="Enter amount..." min="0" step="0.01" oninput="calcCategory()">
+          </div>
+
+        </div>
+      </div>
+      <div>
+        <div id="catResultPlaceholder" class="placeholder-result">
+          <div class="icon">📂</div>
+          <p><strong>Select a country and category</strong><br>to find the correct VAT rate</p>
+        </div>
+        <div id="catResultBox" style="display:none;">
+          <div class="card" style="border: 2px solid var(--primary);">
+            <div class="card-title" style="color:var(--primary);">
+              <div class="card-title-icon">✅</div>
+              <span id="catResultTitle">Rate Found</span>
+            </div>
+            <div style="text-align:center;padding:20px 0;">
+              <div style="font-family:'Syne',sans-serif;font-size:60px;font-weight:800;color:var(--primary);" id="catRateDisplay">—</div>
+              <div style="color:var(--muted);font-size:14px;margin-top:4px;" id="catRateName">Standard Rate</div>
+            </div>
+            <div id="catCalcResult" style="display:none;"></div>
+            <div id="catNoteBox" class="info-box" style="margin-top:16px;display:none;">
+              <span class="info-icon">📌</span>
+              <p id="catNoteText"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL 3: INVOICE -->
+  <div class="panel" id="invoicePanel">
+
+    <!-- SELLER / BUYER -->
+    <div class="grid-2">
+      <div class="invoice-section">
+        <div class="invoice-section-title">📤 Seller / From</div>
+        <div class="field"><label>Company / Name</label><input type="text" id="sellerName" placeholder="Your Company Ltd."></div>
+        <div class="grid-2-3">
+          <div class="field"><label>Email</label><input type="email" id="sellerEmail" placeholder="email@company.com"></div>
+          <div class="field"><label>VAT Number</label><input type="text" id="sellerVAT" placeholder="GB123456789"></div>
+        </div>
+        <div class="field"><label>Address</label><input type="text" id="sellerAddress" placeholder="123 Street, City, Country"></div>
+      </div>
+      <div class="invoice-section">
+        <div class="invoice-section-title">📥 Bill To / Client</div>
+        <div class="field"><label>Company / Name</label><input type="text" id="buyerName" placeholder="Client Company Ltd."></div>
+        <div class="grid-2-3">
+          <div class="field"><label>Email</label><input type="email" id="buyerEmail" placeholder="client@email.com"></div>
+          <div class="field"><label>VAT Number</label><input type="text" id="buyerVAT" placeholder="Optional"></div>
+        </div>
+        <div class="field"><label>Address</label><input type="text" id="buyerAddress" placeholder="456 Avenue, City, Country"></div>
+      </div>
+    </div>
+
+    <!-- INVOICE DETAILS -->
+    <div class="invoice-section">
+      <div class="invoice-section-title">🧾 Invoice Details</div>
+      <div class="grid-3">
+        <div class="field"><label>Invoice Number</label><input type="text" id="invNumber" placeholder="INV-001"></div>
+        <div class="field"><label>Invoice Date</label><input type="date" id="invDate"></div>
+        <div class="field"><label>Due Date</label><input type="date" id="invDue"></div>
+      </div>
+      <div class="grid-2-3">
+        <div class="field"><label>Country (for VAT rates)</label>
+          <select id="invCountry" onchange="updateInvVatRates()">
+            <option value="">— Select Country —</option>
+          </select>
+        </div>
+        <div class="field"><label>Currency</label>
+          <select id="invCurrency">
+            <option value="$">USD — US Dollar</option>
+            <option value="€">EUR — Euro</option>
+            <option value="£">GBP — British Pound</option>
+            <option value="¥">JPY — Japanese Yen</option>
+            <option value="C$">CAD — Canadian Dollar</option>
+            <option value="A$">AUD — Australian Dollar</option>
+            <option value="Fr">CHF — Swiss Franc</option>
+            <option value="R$">BRL — Brazilian Real</option>
+            <option value="₹">INR — Indian Rupee</option>
+            <option value="₽">RUB — Russian Ruble</option>
+            <option value="SAR">SAR — Saudi Riyal</option>
+            <option value="AED">AED — UAE Dirham</option>
+            <option value="MXN">MXN — Mexican Peso</option>
+            <option value="ZAR">ZAR — South African Rand</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINE ITEMS -->
+    <div class="invoice-section">
+      <div class="invoice-section-title">📋 Line Items</div>
+      <div class="line-items-header">
+        <span>Description</span><span>Qty</span><span>Unit Price</span><span>VAT %</span><span></span>
+      </div>
+      <div id="lineItems"></div>
+      <button class="btn btn-outline btn-sm" onclick="addLineItem()" style="margin-top:8px;">
+        ➕ Add Line Item
+      </button>
+      <div class="invoice-totals" id="invoiceTotals"></div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="invoice-section">
+      <div class="invoice-section-title">📝 Notes</div>
+      <div class="field">
+        <label>Payment Terms / Notes</label>
+        <input type="text" id="invNotes" placeholder="e.g. Payment due within 30 days. Thank you for your business!">
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="invoice-actions">
+      <button class="btn btn-primary" onclick="generatePreview()">👁️ Preview Invoice</button>
+      <button class="btn btn-accent" onclick="printInvoice()">🖨️ Print Invoice</button>
+      <button class="btn btn-outline" onclick="shareInvoice()">🔗 Share Link</button>
+      <button class="btn btn-outline" onclick="resetInvoice()">🗑️ Reset</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="preview-invoice" id="invoicePreview"></div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <div class="section-title">How It Works</div>
+    <div class="section-sub">Three simple steps to calculate VAT and create professional invoices</div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Select Your Country</div>
+        <div class="step-desc">Choose from 60+ countries. VAT rates load automatically based on the latest tax rules.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Enter Amount & Category</div>
+        <div class="step-desc">Input your price and optionally select a product category to apply the correct reduced rate.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Get Results & Invoice</div>
+        <div class="step-desc">See instant VAT breakdown. Generate a professional invoice with print and share options.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COUNTRIES REFERENCE -->
+  <div class="countries-section">
+    <div class="section-title">VAT Rates by Country</div>
+    <div class="section-sub">Click any country to calculate instantly</div>
+    <div class="countries-grid" id="countriesGrid"></div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="section-title">Frequently Asked Questions</div>
+    <div class="section-sub" style="margin-bottom:24px;">Everything you need to know about VAT calculation</div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is VAT and how is it calculated? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a">VAT (Value Added Tax) is a consumption tax applied at each stage of production and sale. To add VAT: multiply your net price by (1 + VAT rate). For example, €100 at 20% VAT = €100 × 1.20 = €120. To remove VAT from a gross price: divide by (1 + VAT rate). So €120 ÷ 1.20 = €100 net.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What is the difference between B2B and B2C VAT? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a">B2C (Business to Consumer): You charge VAT to the end customer. B2B (Business to Business): Within the EU, if both parties are VAT-registered, the reverse charge mechanism may apply — the buyer accounts for VAT instead of the seller. This eliminates the need for foreign sellers to register for VAT in the buyer's country.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Why do some products have lower VAT rates? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a">Most countries apply reduced VAT rates to essential goods like basic food, medicine, and children's products to make them more affordable. For example, in Spain, basic food has a 4% super-reduced rate, while restaurants charge 10%, and most other goods are taxed at 21%.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is this VAT calculator accurate? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a">This calculator uses standard published VAT rates for each country. Rates are updated regularly. However, actual VAT rates can vary by specific product type, local regulations, and recent legislative changes. Always verify rates with your local tax authority for official compliance. This tool is for informational purposes.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Can I use the invoice generator for real invoices? <span class="faq-chevron">▼</span></button>
+      <div class="faq-a">Yes, the invoice generator creates professional invoices with correct VAT calculations. You can print them or share via link. However, for official tax compliance, ensure your invoices meet local legal requirements such as sequential invoice numbering, your full VAT registration number, and any mandatory local fields required by your tax authority.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <strong>VATCalc — Free Global VAT & Sales Tax Calculator | 150+ Countries</strong>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+    <a href="#">VAT Rates Guide</a>
+  </div>
+  <div class="footer-disclaimer">
+    Disclaimer: VAT rates are provided for informational purposes only. Rates may change. Always verify with official government tax authorities for compliance.
+  </div>
+</footer>
+
+<script>
+// ===================== DATA =====================
+const VAT_DATA = {
+  // ===== NORTH AMERICA =====
+  "United States": { flag:"🇺🇸", standard:8.5, reduced:[6,4,0], currency:"$", name:"Sales Tax", taxType:"sales",
+    notes:{8.5:"Avg combined state+local rate",6:"State rate only (avg)",4:"Reduced state rate",0:"Groceries/medicine (most states)"},
+    special:"ℹ️ The US uses Sales Tax, not VAT. Rates vary by state (0%–13.5%). Average combined rate shown. Select a state below for exact rates.",
+    states:{"Alabama":9,"Alaska":1.76,"Arizona":8.37,"Arkansas":9.47,"California":8.82,"Colorado":7.77,"Connecticut":6.35,"Delaware":0,"Florida":7.01,"Georgia":7.33,"Hawaii":4.44,"Idaho":6.02,"Illinois":8.82,"Indiana":7,"Iowa":6.94,"Kansas":8.68,"Kentucky":6,"Louisiana":9.55,"Maine":5.5,"Maryland":6,"Massachusetts":6.25,"Michigan":6,"Minnesota":7.49,"Mississippi":7.07,"Missouri":8.29,"Montana":0,"Nebraska":6.94,"Nevada":8.23,"New Hampshire":0,"New Jersey":6.6,"New Mexico":7.83,"New York":8.52,"North Carolina":6.99,"North Dakota":6.96,"Ohio":7.24,"Oklahoma":8.95,"Oregon":0,"Pennsylvania":6.34,"Rhode Island":7,"South Carolina":7.46,"South Dakota":6.4,"Tennessee":9.55,"Texas":8.2,"Utah":7.19,"Vermont":6.22,"Virginia":5.75,"Washington":9.38,"West Virginia":6.55,"Wisconsin":5.43,"Wyoming":5.36,"Washington DC":6}
+  },
+  "Canada": { flag:"🇨🇦", standard:5, reduced:[0], currency:"C$", name:"GST/HST",
+    notes:{5:"Federal GST rate",0:"Basic groceries, prescription drugs, medical devices"},
+    special:"ℹ️ Canada has federal GST (5%) plus provincial tax. Combined HST rates: Ontario 13%, Nova Scotia 15%, NB 15%, PEI 15%, NFL 15%. Quebec adds QST 9.975%."
+  },
+  "Mexico": { flag:"🇲🇽", standard:16, reduced:[8,0], currency:"MXN", name:"IVA",
+    notes:{8:"Border zone cities (Tijuana, Juárez, Nuevo Laredo etc.)",0:"Food, medicine, books"}
+  },
+
+  // ===== CENTRAL & SOUTH AMERICA =====
+  "Argentina": { flag:"🇦🇷", standard:21, reduced:[10.5,0], currency:"ARS", name:"IVA",
+    notes:{10.5:"Capital goods, livestock, newspapers",0:"Basic food, medicine, books"}
+  },
+  "Bolivia": { flag:"🇧🇴", standard:13, reduced:[], currency:"BOB", name:"IVA", notes:{} },
+  "Brazil": { flag:"🇧🇷", standard:17, reduced:[12,7,0], currency:"R$", name:"ICMS/IPI",
+    notes:{12:"Inter-state goods",7:"Basic food basket",0:"Exported goods"},
+    special:"ℹ️ Brazil's ICMS varies by state (7%–25%). Federal IPI also applies to manufactured goods. Shown is average ICMS rate."
+  },
+  "Chile": { flag:"🇨🇱", standard:19, reduced:[], currency:"CLP", name:"IVA", notes:{} },
+  "Colombia": { flag:"🇨🇴", standard:19, reduced:[5,0], currency:"COP", name:"IVA",
+    notes:{5:"Agricultural supplies, some services",0:"Basic food, medicine, education"}
+  },
+  "Costa Rica": { flag:"🇨🇷", standard:13, reduced:[4,2,1,0], currency:"CRC", name:"IVA",
+    notes:{4:"Private healthcare, tickets",2:"Basic food ingredients",1:"Basic food basket",0:"Education, medicines"}
+  },
+  "Dominican Republic": { flag:"🇩🇴", standard:18, reduced:[16,0], currency:"DOP", name:"ITBIS",
+    notes:{16:"Services",0:"Basic food, medicine, education"}
+  },
+  "Ecuador": { flag:"🇪🇨", standard:15, reduced:[0], currency:"USD", name:"IVA",
+    notes:{0:"Basic food, medicine, education, agriculture"}
+  },
+  "El Salvador": { flag:"🇸🇻", standard:13, reduced:[], currency:"USD", name:"IVA", notes:{} },
+  "Guatemala": { flag:"🇬🇹", standard:12, reduced:[0], currency:"GTQ", name:"IVA",
+    notes:{0:"Exports, basic food"}
+  },
+  "Honduras": { flag:"🇭🇳", standard:15, reduced:[0], currency:"HNL", name:"ISV",
+    notes:{0:"Basic food, medicine, agriculture"}
+  },
+  "Jamaica": { flag:"🇯🇲", standard:15, reduced:[0], currency:"JMD", name:"GCT",
+    notes:{0:"Basic food, medicine, education"}
+  },
+  "Nicaragua": { flag:"🇳🇮", standard:15, reduced:[0], currency:"NIO", name:"IVA",
+    notes:{0:"Basic food, medicine"}
+  },
+  "Panama": { flag:"🇵🇦", standard:7, reduced:[0], currency:"USD", name:"ITBMS",
+    notes:{0:"Basic food, medicine, education"}
+  },
+  "Paraguay": { flag:"🇵🇾", standard:10, reduced:[5], currency:"PYG", name:"IVA",
+    notes:{5:"Basic food, medicines"}
+  },
+  "Peru": { flag:"🇵🇪", standard:18, reduced:[], currency:"PEN", name:"IGV", notes:{} },
+  "Uruguay": { flag:"🇺🇾", standard:22, reduced:[11,0], currency:"UYU", name:"IVA",
+    notes:{11:"Basic food, medicine, tourism",0:"Exports, some services"}
+  },
+  "Venezuela": { flag:"🇻🇪", standard:16, reduced:[8,0], currency:"VES", name:"IVA",
+    notes:{8:"Basic goods",0:"Food, medicine, education"}
+  },
+
+  // ===== EUROPE — EU =====
+  "Austria": { flag:"🇦🇹", standard:20, reduced:[13,10,0], currency:"€", notes:{13:"Cultural events, hotels, plants",10:"Food, books, medicine",0:"Export goods"} },
+  "Belgium": { flag:"🇧🇪", standard:21, reduced:[12,6,0], currency:"€", notes:{12:"Restaurants, phyto products",6:"Food, medicine, books",0:"Exports"} },
+  "Bulgaria": { flag:"🇧🇬", standard:20, reduced:[9,0], currency:"BGN", notes:{9:"Hotel accommodation, books, baby food",0:"Exports"} },
+  "Croatia": { flag:"🇭🇷", standard:25, reduced:[13,5,0], currency:"€", notes:{13:"Food, concerts, newspapers",5:"Basic food, books, cinema",0:"Exports"} },
+  "Cyprus": { flag:"🇨🇾", standard:19, reduced:[9,5,0], currency:"€", notes:{9:"Hotels, restaurants, transport",5:"Food, medicine",0:"Exports"} },
+  "Czech Republic": { flag:"🇨🇿", standard:21, reduced:[15,10,0], currency:"CZK", notes:{15:"Food, books, accommodation",10:"Medicine, water supply",0:"Exports"} },
+  "Denmark": { flag:"🇩🇰", standard:25, reduced:[0], currency:"DKK", notes:{0:"Exports, newspapers (special scheme)"} },
+  "Estonia": { flag:"🇪🇪", standard:22, reduced:[9,0], currency:"€", notes:{9:"Books, medicine, hotels, newspapers",0:"Exports"} },
+  "Finland": { flag:"🇫🇮", standard:25.5, reduced:[14,10,0], currency:"€", notes:{14:"Food, restaurants",10:"Medicine, books, transport",0:"Exports, healthcare"} },
+  "France": { flag:"🇫🇷", standard:20, reduced:[10,5.5,2.1,0], currency:"€", notes:{10:"Restaurants, hotels, books",5.5:"Food, books, public utilities",2.1:"Medicines (reimbursed), newspapers",0:"Exports, intra-EU supplies"} },
+  "Germany": { flag:"🇩🇪", standard:19, reduced:[7,0], currency:"€", notes:{7:"Food, books, public transport, hotels",0:"Exports, medical care"} },
+  "Greece": { flag:"🇬🇷", standard:24, reduced:[13,6,0], currency:"€", notes:{13:"Food, beverages, accommodation",6:"Medicine, books, theatre",0:"Exports"} },
+  "Hungary": { flag:"🇭🇺", standard:27, reduced:[18,5,0], currency:"HUF", notes:{18:"Basic food items (dairy, grain)",5:"Pork, eggs, milk, books, medicine",0:"Exports"} },
+  "Ireland": { flag:"🇮🇪", standard:23, reduced:[13.5,9,4.8,0], currency:"€", notes:{13.5:"Construction, tourism, energy",9:"Newspapers, tourism, vet fees",4.8:"Agriculture",0:"Food, children's clothing, medicine"} },
+  "Italy": { flag:"🇮🇹", standard:22, reduced:[10,5,4,0], currency:"€", notes:{10:"Food, hospitality, exhibitions",5:"Social welfare items",4:"Basic food, books, baby items",0:"Exports"} },
+  "Latvia": { flag:"🇱🇻", standard:21, reduced:[12,5,0], currency:"€", notes:{12:"Medical devices, baby products",5:"Medicine, food for babies",0:"Exports"} },
+  "Lithuania": { flag:"🇱🇹", standard:21, reduced:[9,5,0], currency:"€", notes:{9:"Books, hotels, firewood",5:"Medicine, medical equipment",0:"Exports"} },
+  "Luxembourg": { flag:"🇱🇺", standard:17, reduced:[14,8,3,0], currency:"€", notes:{14:"Wine, advertising",8:"Gas, electricity, hairdressers",3:"Food, books, medicine, children clothing",0:"Exports"} },
+  "Malta": { flag:"🇲🇹", standard:18, reduced:[7,5,0], currency:"€", notes:{7:"Hotels, medical accessories",5:"Food, medicine, printed matter",0:"Exports"} },
+  "Netherlands": { flag:"🇳🇱", standard:21, reduced:[9,0], currency:"€", notes:{9:"Food, medicine, books, art, agriculture",0:"Exports"} },
+  "Poland": { flag:"🇵🇱", standard:23, reduced:[8,5,0], currency:"PLN", notes:{8:"Food, medicine, construction",5:"Basic food, books",0:"Exports"} },
+  "Portugal": { flag:"🇵🇹", standard:23, reduced:[13,6,0], currency:"€", notes:{13:"Wine, food services, oil",6:"Food, medicine, books, baby products",0:"Exports"} },
+  "Romania": { flag:"🇷🇴", standard:19, reduced:[9,5,0], currency:"RON", notes:{9:"Food, books, medicines, hotels",5:"Social housing, solar panels",0:"Exports"} },
+  "Slovakia": { flag:"🇸🇰", standard:20, reduced:[10,0], currency:"€", notes:{10:"Food, medicine, books, hotels",0:"Exports"} },
+  "Slovenia": { flag:"🇸🇮", standard:22, reduced:[9.5,5,0], currency:"€", notes:{9.5:"Food, books, medicine, accommodation",5:"Books, live music, cut flowers",0:"Exports"} },
+  "Spain": { flag:"🇪🇸", standard:21, reduced:[10,4,0], currency:"€", notes:{10:"Restaurants, hotels, food products",4:"Basic food, medicine, books, newspapers",0:"Exports"} },
+  "Sweden": { flag:"🇸🇪", standard:25, reduced:[12,6,0], currency:"SEK", notes:{12:"Food, restaurants, hotels, transport",6:"Books, cultural events, newspapers",0:"Exports, healthcare, education"} },
+
+  // ===== EUROPE — NON EU =====
+  "Albania": { flag:"🇦🇱", standard:20, reduced:[6,0], currency:"ALL", notes:{6:"Books, medicine",0:"Exports"} },
+  "Belarus": { flag:"🇧🇾", standard:20, reduced:[10,0], currency:"BYR", notes:{10:"Food, children's goods, books",0:"Exports"} },
+  "Bosnia & Herzegovina": { flag:"🇧🇦", standard:17, reduced:[], currency:"BAM", notes:{} },
+  "Georgia": { flag:"🇬🇪", standard:18, reduced:[0], currency:"GEL", notes:{0:"Exports, international transport"} },
+  "Iceland": { flag:"🇮🇸", standard:24, reduced:[11,0], currency:"ISK", notes:{11:"Food, hotels, books, transport",0:"Exports"} },
+  "Kosovo": { flag:"🇽🇰", standard:18, reduced:[8,0], currency:"EUR", notes:{8:"Basic food, medicine, books",0:"Exports"} },
+  "Liechtenstein": { flag:"🇱🇮", standard:8.1, reduced:[3.8,2.6,0], currency:"CHF", notes:{3.8:"Hotels",2.6:"Food, books, medicine",0:"Exports"} },
+  "Moldova": { flag:"🇲🇩", standard:20, reduced:[12,8,0], currency:"MDL", notes:{12:"Certain food products",8:"Hotels, gas",0:"Exports"} },
+  "Montenegro": { flag:"🇲🇪", standard:21, reduced:[7,0], currency:"€", notes:{7:"Basic food, medicine, books, accommodation",0:"Exports"} },
+  "North Macedonia": { flag:"🇲🇰", standard:18, reduced:[10,5,0], currency:"MKD", notes:{10:"Food, accommodation",5:"Books, medicine",0:"Exports"} },
+  "Norway": { flag:"🇳🇴", standard:25, reduced:[15,12,0], currency:"NOK", notes:{15:"Food",12:"Hotels, transport, culture",0:"Exports, health services"} },
+  "Serbia": { flag:"🇷🇸", standard:20, reduced:[10,0], currency:"RSD", notes:{10:"Basic food, medicine, books, hotels",0:"Exports"} },
+  "Switzerland": { flag:"🇨🇭", standard:8.1, reduced:[3.8,2.6,0], currency:"CHF", notes:{3.8:"Hotels",2.6:"Food, books, medicine, newspapers",0:"Exports, healthcare"} },
+  "United Kingdom": { flag:"🇬🇧", standard:20, reduced:[5,0], currency:"£", notes:{5:"Energy, children's car seats, sanitary products",0:"Food, children's clothing, books, medicine"} },
+  "Russia": { flag:"🇷🇺", standard:20, reduced:[10,0], currency:"₽", notes:{10:"Food, medicine, books, children's goods",0:"Export goods, medical services"} },
+  "Turkey": { flag:"🇹🇷", standard:20, reduced:[10,1,0], currency:"TRY", notes:{10:"Food, hospitality, textile",1:"Basic agricultural products",0:"Exports"} },
+  "Ukraine": { flag:"🇺🇦", standard:20, reduced:[7,0], currency:"UAH", notes:{7:"Medicine, medical products",0:"Basic necessities, exports"} },
+
+  // ===== MIDDLE EAST =====
+  "Bahrain": { flag:"🇧🇭", standard:10, reduced:[0], currency:"BHD", notes:{0:"Basic food, healthcare, education, construction"} },
+  "Egypt": { flag:"🇪🇬", standard:14, reduced:[5,0], currency:"EGP", notes:{5:"Essential goods",0:"Basic food, medicine"} },
+  "Iran": { flag:"🇮🇷", standard:10, reduced:[0], currency:"IRR", notes:{0:"Agriculture, healthcare, education"} },
+  "Iraq": { flag:"🇮🇶", standard:0, reduced:[], currency:"IQD", name:"No VAT", notes:{}, special:"ℹ️ Iraq does not currently have a general VAT system." },
+  "Israel": { flag:"🇮🇱", standard:18, reduced:[0], currency:"ILS", notes:{0:"Exports, Eilat free zone, agricultural exports"} },
+  "Jordan": { flag:"🇯🇴", standard:16, reduced:[4,0], currency:"JOD", notes:{4:"Basic goods",0:"Medicine, food staples"} },
+  "Kuwait": { flag:"🇰🇼", standard:0, reduced:[], currency:"KWD", name:"No VAT", notes:{}, special:"ℹ️ Kuwait currently has no VAT. Plans to introduce 5% VAT have been discussed." },
+  "Lebanon": { flag:"🇱🇧", standard:11, reduced:[0], currency:"LBP", notes:{0:"Basic food, medicine, education"} },
+  "Oman": { flag:"🇴🇲", standard:5, reduced:[0], currency:"OMR", notes:{0:"Basic food, medicine, education, financial services"} },
+  "Palestine": { flag:"🇵🇸", standard:16, reduced:[], currency:"ILS", notes:{} },
+  "Qatar": { flag:"🇶🇦", standard:0, reduced:[], currency:"QAR", name:"No VAT", notes:{}, special:"ℹ️ Qatar currently has no VAT system in place." },
+  "Saudi Arabia": { flag:"🇸🇦", standard:15, reduced:[0], currency:"SAR", notes:{0:"Basic food, medicine, education, healthcare, financial services"} },
+  "UAE": { flag:"🇦🇪", standard:5, reduced:[0], currency:"AED", notes:{0:"Healthcare, education, basic food, financial services"} },
+  "Yemen": { flag:"🇾🇪", standard:5, reduced:[], currency:"YER", notes:{} },
+
+  // ===== AFRICA =====
+  "Algeria": { flag:"🇩🇿", standard:19, reduced:[9,0], currency:"DZD", notes:{9:"Basic goods",0:"Exports, agriculture"} },
+  "Angola": { flag:"🇦🇴", standard:14, reduced:[7,5,2,0], currency:"AOA", notes:{7:"Essential goods",5:"Utilities",2:"Basic basket goods",0:"Exports"} },
+  "Cameroon": { flag:"🇨🇲", standard:19.25, reduced:[0], currency:"XAF", notes:{0:"Exports, basic necessities"} },
+  "Côte d'Ivoire": { flag:"🇨🇮", standard:18, reduced:[9,0], currency:"XOF", notes:{9:"Tourism",0:"Exports, agriculture, medicine"} },
+  "DR Congo": { flag:"🇨🇩", standard:16, reduced:[0], currency:"CDF", notes:{0:"Exports, basic food"} },
+  "Ethiopia": { flag:"🇪🇹", standard:15, reduced:[0], currency:"ETB", notes:{0:"Exports, basic food, medicine"} },
+  "Ghana": { flag:"🇬🇭", standard:15, reduced:[0], currency:"GHS", notes:{0:"Basic food, medicine, education, exports"} },
+  "Kenya": { flag:"🇰🇪", standard:16, reduced:[0], currency:"KES", notes:{0:"Basic food, medicine, water, agriculture, exports"} },
+  "Libya": { flag:"🇱🇾", standard:0, reduced:[], currency:"LYD", name:"No VAT", notes:{}, special:"ℹ️ Libya does not currently have a VAT system." },
+  "Madagascar": { flag:"🇲🇬", standard:20, reduced:[0], currency:"MGA", notes:{0:"Basic food, medicine, exports"} },
+  "Malawi": { flag:"🇲🇼", standard:16.5, reduced:[0], currency:"MWK", notes:{0:"Exports, basic food"} },
+  "Morocco": { flag:"🇲🇦", standard:20, reduced:[14,10,7,0], currency:"MAD", notes:{14:"Transport, banking, insurance",10:"Hotel, water supply, construction",7:"Basic food items",0:"Exports, agriculture"} },
+  "Mozambique": { flag:"🇲🇿", standard:17, reduced:[0], currency:"MZN", notes:{0:"Basic food, medicine, exports"} },
+  "Namibia": { flag:"🇳🇦", standard:15, reduced:[0], currency:"NAD", notes:{0:"Basic food, exports"} },
+  "Nigeria": { flag:"🇳🇬", standard:7.5, reduced:[0], currency:"NGN", notes:{0:"Basic food, medical/pharmaceutical products, education, exports"} },
+  "Rwanda": { flag:"🇷🇼", standard:18, reduced:[0], currency:"RWF", notes:{0:"Exports, basic food, medicine, education"} },
+  "Senegal": { flag:"🇸🇳", standard:18, reduced:[0], currency:"XOF", notes:{0:"Exports, basic food, medicine"} },
+  "South Africa": { flag:"🇿🇦", standard:15, reduced:[0], currency:"ZAR", notes:{0:"Basic food (19 items), fuel, public transport, medicine, exports"} },
+  "Sudan": { flag:"🇸🇩", standard:17, reduced:[], currency:"SDG", notes:{} },
+  "Tanzania": { flag:"🇹🇿", standard:18, reduced:[0], currency:"TZS", notes:{0:"Exports, basic food, medicine"} },
+  "Tunisia": { flag:"🇹🇳", standard:19, reduced:[13,7,0], currency:"TND", notes:{13:"Various services",7:"Basic goods, agriculture",0:"Exports, medicine"} },
+  "Uganda": { flag:"🇺🇬", standard:18, reduced:[0], currency:"UGX", notes:{0:"Exports, basic food, medicine, education"} },
+  "Zambia": { flag:"🇿🇲", standard:16, reduced:[0], currency:"ZMW", notes:{0:"Basic food, medicine, exports"} },
+  "Zimbabwe": { flag:"🇿🇼", standard:15, reduced:[0], currency:"ZWL", notes:{0:"Basic food, medicine, exports"} },
+
+  // ===== ASIA =====
+  "Afghanistan": { flag:"🇦🇫", standard:10, reduced:[], currency:"AFN", notes:{} },
+  "Armenia": { flag:"🇦🇲", standard:20, reduced:[0], currency:"AMD", notes:{0:"Exports, international transport"} },
+  "Azerbaijan": { flag:"🇦🇿", standard:18, reduced:[0], currency:"AZN", notes:{0:"Exports, agriculture, medicine"} },
+  "Bangladesh": { flag:"🇧🇩", standard:15, reduced:[10,5,0], currency:"BDT", notes:{10:"Certain manufactured goods",5:"Basic services",0:"Agriculture, exports"} },
+  "Cambodia": { flag:"🇰🇭", standard:10, reduced:[0], currency:"KHR", notes:{0:"Exports, international transport"} },
+  "China": { flag:"🇨🇳", standard:13, reduced:[9,6,0], currency:"¥", notes:{9:"Agriculture, utilities, books",6:"Services, technology, finance",0:"Agriculture exports, certain financial services"} },
+  "Georgia": { flag:"🇬🇪", standard:18, reduced:[0], currency:"GEL", notes:{0:"Exports, healthcare, education"} },
+  "India": { flag:"🇮🇳", standard:18, reduced:[12,5,0], currency:"₹", name:"GST",
+    notes:{12:"Processed food, computers, business services",5:"Essential goods, transport",0:"Food, medicine, exports"},
+    special:"ℹ️ India's GST has 4 slabs: 5%, 12%, 18%, 28%. Plus special rates. Shown is the standard 18% rate."
+  },
+  "Indonesia": { flag:"🇮🇩", standard:11, reduced:[0], currency:"IDR", notes:{0:"Basic food, medicine, education, financial services"} },
+  "Japan": { flag:"🇯🇵", standard:10, reduced:[8,0], currency:"¥", name:"Consumption Tax",
+    notes:{8:"Food and non-alcoholic beverages (reduced rate)",0:"Exports, international transport"}
+  },
+  "Kazakhstan": { flag:"🇰🇿", standard:12, reduced:[0], currency:"KZT", notes:{0:"Exports, international transport"} },
+  "Kyrgyzstan": { flag:"🇰🇬", standard:12, reduced:[0], currency:"KGS", notes:{0:"Exports"} },
+  "Laos": { flag:"🇱🇦", standard:10, reduced:[0], currency:"LAK", notes:{0:"Exports, basic goods"} },
+  "Malaysia": { flag:"🇲🇾", standard:8, reduced:[5,0], currency:"MYR", name:"SST",
+    notes:{5:"Certain services",0:"Essential items, healthcare, education"},
+    special:"ℹ️ Malaysia uses a Sales & Service Tax (SST). Sales Tax 5%/10% applies to goods; Service Tax 8% applies to services."
+  },
+  "Mongolia": { flag:"🇲🇳", standard:10, reduced:[0], currency:"MNT", notes:{0:"Exports"} },
+  "Myanmar": { flag:"🇲🇲", standard:5, reduced:[], currency:"MMK", name:"Commercial Tax", notes:{} },
+  "Nepal": { flag:"🇳🇵", standard:13, reduced:[0], currency:"NPR", notes:{0:"Exports, basic food, medicine"} },
+  "Pakistan": { flag:"🇵🇰", standard:17, reduced:[10,0], currency:"PKR", notes:{10:"Certain services",0:"Basic food, medicine, exports"} },
+  "Philippines": { flag:"🇵🇭", standard:12, reduced:[0], currency:"PHP", notes:{0:"Food, medicine, senior citizens, exports"} },
+  "Singapore": { flag:"🇸🇬", standard:9, reduced:[0], currency:"S$", name:"GST",
+    notes:{0:"Medicine, financial services, exports"}
+  },
+  "South Korea": { flag:"🇰🇷", standard:10, reduced:[0], currency:"₩", name:"VAT",
+    notes:{0:"Basic food, medicine, education, exports"}
+  },
+  "Sri Lanka": { flag:"🇱🇰", standard:18, reduced:[0], currency:"LKR", notes:{0:"Exports, basic food, medicine"} },
+  "Taiwan": { flag:"🇹🇼", standard:5, reduced:[0], currency:"NT$", notes:{0:"Exports, healthcare, agriculture"} },
+  "Tajikistan": { flag:"🇹🇯", standard:14, reduced:[0], currency:"TJS", notes:{0:"Exports"} },
+  "Thailand": { flag:"🇹🇭", standard:7, reduced:[0], currency:"THB", notes:{0:"Agriculture, basic services, exports"},
+    special:"ℹ️ Thailand's standard rate is 10% but has been reduced to 7% — this reduced rate has been extended repeatedly."
+  },
+  "Turkmenistan": { flag:"🇹🇲", standard:15, reduced:[], currency:"TMT", notes:{} },
+  "Uzbekistan": { flag:"🇺🇿", standard:12, reduced:[0], currency:"UZS", notes:{0:"Exports, basic food, medicine"} },
+  "Vietnam": { flag:"🇻🇳", standard:10, reduced:[5,0], currency:"VND", notes:{5:"Medicine, medical equipment, education technology",0:"Basic food, agriculture, exports"} },
+
+  // ===== OCEANIA =====
+  "Australia": { flag:"🇦🇺", standard:10, reduced:[0], currency:"A$", name:"GST",
+    notes:{0:"Basic food, healthcare, education, childcare, exports"}
+  },
+  "Fiji": { flag:"🇫🇯", standard:9, reduced:[0], currency:"FJD", name:"VAT", notes:{0:"Exports, basic food"} },
+  "New Zealand": { flag:"🇳🇿", standard:15, reduced:[], currency:"NZ$", name:"GST",
+    notes:{},
+    special:"ℹ️ New Zealand's GST applies to almost all goods and services with very few exemptions — one of the broadest bases in the world."
+  },
+  "Papua New Guinea": { flag:"🇵🇬", standard:10, reduced:[0], currency:"PGK", notes:{0:"Basic food, medicine, exports"} },
+  "Samoa": { flag:"🇼🇸", standard:15, reduced:[0], currency:"WST", notes:{0:"Exports, basic goods"} },
+};
+
+const CATEGORIES = {
+  "Food & Groceries": {
+    items: ["bread","butter","milk","eggs","meat","vegetables","fruits","rice","pasta","flour","sugar","salt","olive oil","frozen food","organic food","baby food","pet food"],
+    ruleKey: "food"
+  },
+  "Restaurants & Food Service": {
+    items: ["restaurant meal","takeaway food","fast food","catering","café coffee","hotel breakfast","food delivery"],
+    ruleKey: "restaurant"
+  },
+  "Medicine & Healthcare": {
+    items: ["prescription medicine","over-the-counter drugs","vitamins","medical devices","glasses","wheelchair","dental treatment","hospital services","health insurance"],
+    ruleKey: "medicine"
+  },
+  "Books & Education": {
+    items: ["printed books","e-books","textbooks","educational materials","newspapers","magazines","school supplies"],
+    ruleKey: "books"
+  },
+  "Electronics & Technology": {
+    items: ["smartphone","laptop","computer","tablet","TV","camera","printer","software","gaming console","headphones","smart watch"],
+    ruleKey: "electronics"
+  },
+  "Clothing & Footwear": {
+    items: ["adult clothing","children clothing","shoes","handbags","sportswear","underwear","luxury fashion"],
+    ruleKey: "clothing"
+  },
+  "Hotels & Accommodation": {
+    items: ["hotel room","holiday accommodation","hostel","Airbnb","camping"],
+    ruleKey: "hotel"
+  },
+  "Transport": {
+    items: ["airline ticket","train ticket","bus ticket","taxi","car rental","parking","toll fees","bicycle"],
+    ruleKey: "transport"
+  },
+  "Construction & Real Estate": {
+    items: ["new construction","building renovation","property sale","architectural services"],
+    ruleKey: "construction"
+  },
+  "Financial & Insurance Services": {
+    items: ["banking fees","insurance premium","loan interest","investment management"],
+    ruleKey: "financial"
+  },
+  "Arts & Entertainment": {
+    items: ["cinema ticket","concert ticket","museum entry","theatre","sports event","streaming subscription","music download"],
+    ruleKey: "entertainment"
+  },
+  "Energy & Utilities": {
+    items: ["electricity","gas","water","heating","solar panels","renewable energy"],
+    ruleKey: "energy"
+  },
+  "Professional Services": {
+    items: ["accounting","legal services","consulting","marketing","IT services","cleaning services","security services"],
+    ruleKey: "services"
+  },
+};
+
+// Simplified category rate rules per country key
+const CAT_RULES = {
+  "food": {
+    "United States":0,"Canada":0,"United Kingdom":0,"Germany":7,"France":5.5,"Spain":4,"Italy":4,
+    "Netherlands":9,"Ireland":0,"Poland":5,"Sweden":12,"Australia":0,"Japan":8,"China":9,
+    "Mexico":0,"Brazil":7,"Saudi Arabia":0,"UAE":0,"India":0,"South Korea":0,"Russia":10,
+    "Turkey":1,"Argentina":0,"Colombia":0,"South Africa":0,"Nigeria":0,"Egypt":0,
+    "Norway":15,"Denmark":25,"Switzerland":2.6,"Austria":10,"Belgium":6,"Portugal":6,
+    "Greece":13,"Croatia":5,"Finland":14,"Hungary":18,"Romania":9,"Bulgaria":0,"Slovakia":10,
+    "Vietnam":0,"Indonesia":0,"Pakistan":0,"Bangladesh":0,"Philippines":0,"Thailand":0,
+    "New Zealand":15,"Singapore":9,"Malaysia":0
+  },
+  "restaurant": {
+    "United States":8.5,"Canada":5,"United Kingdom":20,"Germany":7,"France":10,"Spain":10,
+    "Italy":10,"Netherlands":9,"Ireland":9,"Poland":8,"Sweden":12,"Australia":10,"Japan":10,
+    "Mexico":16,"Brazil":17,"Argentina":21,"Turkey":10,"Russia":20,"South Korea":10,
+    "Norway":15,"Austria":10,"Belgium":12,"Portugal":13,"Greece":13,"Croatia":13
+  },
+  "medicine": {
+    "United States":0,"Canada":0,"United Kingdom":0,"Germany":7,"France":2.1,"Spain":4,
+    "Italy":4,"Netherlands":0,"Ireland":0,"Poland":5,"Sweden":0,"Australia":0,"Japan":0,
+    "Mexico":0,"Brazil":12,"India":0,"Saudi Arabia":0,"UAE":0,"South Africa":0,
+    "Turkey":0,"Russia":10,"Argentina":0,"Colombia":0,"Egypt":0,"Norway":0,
+    "Switzerland":2.6,"Austria":10,"Belgium":6,"Portugal":6,"Greece":6,"Romania":9,
+    "South Korea":0,"Indonesia":0,"Pakistan":0,"Philippines":0,"Vietnam":5,"Thailand":0
+  },
+  "books": {
+    "United States":0,"Canada":0,"United Kingdom":0,"Germany":7,"France":5.5,"Spain":4,
+    "Italy":4,"Netherlands":9,"Ireland":0,"Poland":5,"Sweden":6,"Australia":10,"Japan":10,
+    "Mexico":0,"India":5,"Norway":0,"Switzerland":2.6,"Austria":10,"Belgium":6,
+    "Portugal":6,"Greece":6,"Croatia":5,"Romania":9,"Hungary":5,"Turkey":1,
+    "Russia":10,"South Korea":0,"Indonesia":0,"Thailand":0,"Vietnam":5
+  },
+  "hotel": {
+    "United States":8.5,"Canada":5,"United Kingdom":20,"Germany":7,"France":10,"Spain":10,
+    "Italy":10,"Netherlands":9,"Ireland":13.5,"Poland":8,"Sweden":12,"Austria":10,
+    "Belgium":6,"Portugal":13,"Greece":13,"Croatia":13,"Norway":12,"Turkey":10,
+    "Australia":10,"Japan":10,"Mexico":16,"Brazil":17,"South Africa":15,"Egypt":14
+  },
+  "energy": {
+    "United Kingdom":5,"Germany":7,"France":5.5,"Spain":10,"Italy":10,"Netherlands":9,
+    "Poland":8,"Belgium":6,"Ireland":13.5,"Austria":13,"Sweden":25,"Norway":25,
+    "Romania":5,"Hungary":5,"Turkey":10,"Russia":20
+  },
+  "electronics": {
+    "United States":8.5,"Canada":5,"United Kingdom":20,"Germany":19,"France":20,"Spain":21,
+    "Italy":22,"Netherlands":21,"Australia":10,"Japan":10,"China":13,"India":18,
+    "South Korea":10,"Singapore":9,"Brazil":17,"Mexico":16,"Turkey":20,"Russia":20
+  },
+  "transport": {
+    "United Kingdom":0,"Germany":7,"France":10,"Spain":10,"Italy":10,"Netherlands":9,
+    "Ireland":9,"Sweden":6,"Norway":12,"Australia":10,"Japan":10,"India":5,
+    "South Korea":0,"Turkey":1,"Russia":20,"Mexico":0,"Brazil":0
+  },
+};
+
+// ===================== STATE =====================
+let selectedCountry = null;
+let selectedRate = null;
+let calcDirection = 'add';
+let userType = 'business';
+let catCountry = null;
+let catRate = null;
+let lineItemCount = 0;
+
+// ===================== INIT =====================
+document.addEventListener('DOMContentLoaded', () => {
+  populateCountryDropdowns();
+  buildCountriesGrid();
+  setDefaultDates();
+  addLineItem();
+});
+
+function populateCountryDropdowns() {
+  const opts = Object.keys(VAT_DATA).sort().map(c =>
+    `<option value="${c}">${VAT_DATA[c].flag} ${c}</option>`
+  ).join('');
+  ['countrySelect','catCountrySelect','invCountry'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = `<option value="">— Select Country —</option>` + opts;
+  });
+}
+
+function setDefaultDates() {
+  const today = new Date();
+  const due = new Date(); due.setDate(due.getDate() + 30);
+  const fmt = d => d.toISOString().split('T')[0];
+  document.getElementById('invDate').value = fmt(today);
+  document.getElementById('invDue').value = fmt(due);
+  document.getElementById('invNumber').value = 'INV-' + String(Math.floor(Math.random()*900)+100);
+}
+
+function buildCountriesGrid() {
+  const grid = document.getElementById('countriesGrid');
+  grid.innerHTML = Object.entries(VAT_DATA).sort((a,b)=>a[0].localeCompare(b[0])).map(([name, d]) =>
+    `<div class="country-card" onclick="quickSelect('${name}')">
+      <span class="country-flag">${d.flag}</span>
+      <div class="country-info">
+        <div class="country-name">${name}</div>
+        <div class="country-rate">${d.name||'VAT'} ${d.standard}% standard</div>
+      </div>
+    </div>`
+  ).join('');
+}
+
+function quickSelect(country) {
+  switchTab('calc');
+  document.getElementById('countrySelect').value = country;
+  onCountryChange();
+  window.scrollTo({top:200,behavior:'smooth'});
+}
+
+// ===================== TAB =====================
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  document.getElementById(tab + 'Panel').classList.add('active');
+}
+
+// ===================== CALCULATOR =====================
+function setUserType(type, btn) {
+  userType = type;
+  document.querySelectorAll('.toggle-group')[0].querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calculate();
+}
+
+function setDirection(dir, btn) {
+  calcDirection = dir;
+  document.querySelectorAll('.toggle-group')[1]?.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  calculate();
+}
+
+function onCountryChange() {
+  const val = document.getElementById('countrySelect').value;
+  if(!val) {
+    document.getElementById('rateDisplay').style.display='none';
+    document.getElementById('specialNote').style.display='none';
+    document.getElementById('usaStateField').style.display='none';
+    return;
+  }
+  selectedCountry = val;
+  const d = VAT_DATA[val];
+
+  // Show special note if exists
+  const noteEl = document.getElementById('specialNote');
+  const noteText = document.getElementById('specialNoteText');
+  if(d.special) {
+    noteText.textContent = d.special.replace('ℹ️ ','');
+    noteEl.style.display = 'flex';
+  } else { noteEl.style.display = 'none'; }
+
+  // USA state selector
+  const stateField = document.getElementById('usaStateField');
+  if(val === 'United States' && d.states) {
+    const stateSel = document.getElementById('usaStateSelect');
+    stateSel.innerHTML = '<option value="">— Select State (optional) —</option>' +
+      Object.keys(d.states).sort().map(s => `<option value="${s}">${s} — ${d.states[s]}%</option>`).join('');
+    stateField.style.display = 'block';
+  } else { stateField.style.display = 'none'; }
+
+  // Tax type label
+  const taxName = d.name || 'VAT';
+  document.getElementById('rateDisplayTitle').textContent = 'Available ' + taxName + ' Rates';
+
+  const rates = [d.standard, ...d.reduced].filter(r => r !== undefined && r !== null);
+  selectedRate = d.standard;
+  const rateDisplay = document.getElementById('rateDisplay');
+  const pills = document.getElementById('ratePills');
+  pills.innerHTML = rates.map((r,i) => {
+    const isStd = r === d.standard;
+    const note = isStd ? ('Standard ' + taxName) : (d.notes[r] || 'Reduced Rate');
+    return `<button class="rate-pill-btn ${i===0?'selected':''}" onclick="selectRate(${r}, this)">${r}% — ${note}</button>`;
+  }).join('');
+  rateDisplay.style.display = 'block';
+  calculate();
+}
+
+function onStateChange() {
+  const state = document.getElementById('usaStateSelect').value;
+  if(!state || !VAT_DATA['United States'].states) return;
+  const rate = VAT_DATA['United States'].states[state];
+  selectedRate = rate;
+  // Update pills to highlight selected state rate
+  const d = VAT_DATA['United States'];
+  const pills = document.getElementById('ratePills');
+  pills.innerHTML = `<button class="rate-pill-btn selected" onclick="">${rate}% — ${state} Combined Rate</button>
+    <button class="rate-pill-btn" onclick="selectRate(${d.standard}, this)">${d.standard}% — National Average</button>`;
+  calculate();
+}
+
+function selectRate(rate, btn) {
+  selectedRate = rate;
+  document.querySelectorAll('.rate-pill-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  calculate();
+}
+
+function calculate() {
+  const amount = parseFloat(document.getElementById('amountInput').value);
+  if(!selectedCountry || !selectedRate || isNaN(amount) || amount <= 0) {
+    document.getElementById('resultPlaceholder').style.display = 'flex';
+    document.getElementById('resultBox').style.display = 'none';
+    return;
+  }
+  const d = VAT_DATA[selectedCountry];
+  const curr = d.currency;
+  let net, vat, total;
+  if(calcDirection === 'add') {
+    net = amount;
+    vat = net * selectedRate / 100;
+    total = net + vat;
+  } else {
+    total = amount;
+    net = total / (1 + selectedRate/100);
+    vat = total - net;
+  }
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  document.getElementById('resultBox').style.display = 'block';
+  document.getElementById('res-net').textContent = fmt(net, curr);
+  const taxName = d.name || 'VAT';
+  document.getElementById('res-rate-label').textContent = `${taxName} Amount (${selectedRate}%)`;
+  document.getElementById('res-vat').textContent = fmt(vat, curr);
+  document.getElementById('res-total').textContent = fmt(total, curr);
+  const b2bNote = document.getElementById('b2bNote');
+  const b2bText = document.getElementById('b2bNoteText');
+  if(selectedCountry === 'United States') {
+    b2bText.innerHTML = '<strong>US Sales Tax:</strong> Unlike VAT, US sales tax is only collected at the final point of sale to consumers. B2B sales with a valid resale certificate are typically exempt from sales tax.';
+    b2bNote.style.display = 'flex';
+  } else if(selectedCountry === 'Canada') {
+    b2bText.innerHTML = '<strong>Canadian GST/HST:</strong> Businesses can claim input tax credits (ITCs) to recover GST/HST paid on business purchases. HST rates vary by province: ON 13%, NS/NB/PEI/NFL 15%, BC/MB/SK/AB/QC use GST+provincial tax.';
+    b2bNote.style.display = 'flex';
+  } else {
+    b2bText.innerHTML = '<strong>B2B Reverse Charge:</strong> If your customer is VAT-registered in another EU country, reverse charge rules may apply — the buyer accounts for VAT instead of you.';
+    b2bNote.style.display = (userType === 'business') ? 'flex' : 'none';
+  }
+}
+
+function fmt(n, curr) {
+  return (curr||'') + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function copyResult() {
+  const net = document.getElementById('res-net').textContent;
+  const vat = document.getElementById('res-vat').textContent;
+  const total = document.getElementById('res-total').textContent;
+  const text = `VAT Calculation (${selectedCountry} ${selectedRate}%)\nNet: ${net}\nVAT: ${vat}\nTotal: ${total}`;
+  navigator.clipboard.writeText(text).then(() => alert('Result copied to clipboard!')).catch(()=>{});
+}
+
+// ===================== CATEGORY =====================
+function onCatCountryChange() {
+  const val = document.getElementById('catCountrySelect').value;
+  if(!val) return;
+  catCountry = val;
+  const d = VAT_DATA[val];
+  const catSel = document.getElementById('categorySelect');
+  catSel.innerHTML = '<option value="">— Select Category —</option>' +
+    Object.keys(CATEGORIES).map(c => `<option value="${c}">${c}</option>`).join('');
+  catSel.disabled = false;
+  document.getElementById('productSearch').disabled = false;
+}
+
+function onCategoryChange() {
+  const cat = document.getElementById('categorySelect').value;
+  if(!cat || !catCountry) return;
+  const d = VAT_DATA[catCountry];
+  const ruleKey = CATEGORIES[cat]?.ruleKey;
+  let rate = d.standard;
+  let rateName = 'Standard Rate';
+  if(ruleKey && CAT_RULES[ruleKey] && CAT_RULES[ruleKey][catCountry] !== undefined) {
+    rate = CAT_RULES[ruleKey][catCountry];
+    rateName = rate === 0 ? 'Zero Rate (Exempt)' : 'Reduced Rate';
+  }
+  catRate = rate;
+  showCatResult(rate, rateName, cat);
+}
+
+function showCatResult(rate, rateName, cat) {
+  document.getElementById('catResultPlaceholder').style.display = 'none';
+  document.getElementById('catResultBox').style.display = 'block';
+  document.getElementById('catResultTitle').textContent = cat;
+  document.getElementById('catRateDisplay').textContent = rate + '%';
+  document.getElementById('catRateName').textContent = rateName + ' in ' + catCountry;
+  calcCategory();
+  const d = VAT_DATA[catCountry];
+  const noteBox = document.getElementById('catNoteBox');
+  if(d.notes && d.notes[rate]) {
+    document.getElementById('catNoteText').textContent = `Applied to: ${d.notes[rate]}`;
+    noteBox.style.display = 'flex';
+  } else { noteBox.style.display = 'none'; }
+}
+
+function calcCategory() {
+  if(catRate === null || catRate === undefined) return;
+  const amt = parseFloat(document.getElementById('catAmount').value);
+  if(isNaN(amt) || amt <= 0) { document.getElementById('catCalcResult').style.display='none'; return; }
+  const d = VAT_DATA[catCountry];
+  const vat = amt * catRate / 100;
+  const total = amt + vat;
+  const box = document.getElementById('catCalcResult');
+  box.style.display = 'block';
+  box.innerHTML = `
+    <div style="background:var(--bg);border-radius:10px;padding:16px;margin-top:12px;">
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--muted)">Net Amount</span><span style="font-weight:500">${fmt(amt,d.currency)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--muted)">VAT (${catRate}%)</span><span style="font-weight:500">${fmt(vat,d.currency)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:10px 0;font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--primary);"><span>Total</span><span>${fmt(total,d.currency)}</span></div>
+    </div>`;
+}
+
+function searchProduct() {
+  const q = document.getElementById('productSearch').value.toLowerCase().trim();
+  const results = document.getElementById('productResults');
+  if(q.length < 2) { results.innerHTML=''; return; }
+  const matches = [];
+  Object.entries(CATEGORIES).forEach(([cat, data]) => {
+    data.items.forEach(item => {
+      if(item.includes(q)) matches.push({item, cat});
+    });
+  });
+  if(matches.length === 0) { results.innerHTML = `<div style="color:var(--muted);font-size:13px;padding:8px 0;">No products found for "${q}"</div>`; return; }
+  results.innerHTML = matches.slice(0,6).map(m =>
+    `<div style="padding:8px 12px;background:var(--primary-light);border-radius:8px;margin-bottom:6px;cursor:pointer;font-size:13px;display:flex;justify-content:space-between;" onclick="document.getElementById('categorySelect').value='${m.cat}';document.getElementById('productSearch').value='${m.item}';this.parentElement.innerHTML='';onCategoryChange();">
+      <span>📦 ${m.item}</span>
+      <span style="color:var(--muted)">${m.cat}</span>
+    </div>`
+  ).join('');
+}
+
+// ===================== INVOICE =====================
+function updateInvVatRates() {
+  // Updates the vat select in all line items
+  const country = document.getElementById('invCountry').value;
+  if(!country) return;
+  const d = VAT_DATA[country];
+  const rates = [d.standard, ...d.reduced].filter(r=>r!==undefined);
+  document.querySelectorAll('.inv-vat-select').forEach(sel => {
+    const curVal = sel.value;
+    sel.innerHTML = rates.map(r => `<option value="${r}" ${r==curVal?'selected':''}>${r}%</option>`).join('');
+  });
+  calcInvoiceTotals();
+}
+
+function addLineItem() {
+  lineItemCount++;
+  const id = lineItemCount;
+  const country = document.getElementById('invCountry').value;
+  const d = country ? VAT_DATA[country] : null;
+  const rates = d ? [d.standard, ...d.reduced].filter(r=>r!==undefined) : [20,10,5,0];
+  const rateOpts = rates.map(r=>`<option value="${r}">${r}%</option>`).join('') ||
+    [0,5,10,12,20,21,23,25].map(r=>`<option value="${r}">${r}%</option>`).join('');
+  const row = document.createElement('div');
+  row.className = 'line-item-row';
+  row.id = 'line-' + id;
+  row.innerHTML = `
+    <input type="text" placeholder="Description of goods/services..." oninput="calcInvoiceTotals()">
+    <input type="number" placeholder="1" value="1" min="0.01" step="any" oninput="calcInvoiceTotals()">
+    <input type="number" placeholder="0.00" min="0" step="0.01" oninput="calcInvoiceTotals()">
+    <select class="inv-vat-select" onchange="calcInvoiceTotals()">${rateOpts}</select>
+    <button class="remove-line" onclick="removeLine(${id})">✕</button>`;
+  document.getElementById('lineItems').appendChild(row);
+  calcInvoiceTotals();
+}
+
+function removeLine(id) {
+  const el = document.getElementById('line-' + id);
+  if(el) el.remove();
+  calcInvoiceTotals();
+}
+
+function calcInvoiceTotals() {
+  const currency = document.getElementById('invCurrency').value;
+  let subtotal = 0, totalVAT = 0;
+  const vatGroups = {};
+  document.querySelectorAll('.line-item-row').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const qty = parseFloat(inputs[1]?.value) || 0;
+    const price = parseFloat(inputs[2]?.value) || 0;
+    const rate = parseFloat(row.querySelector('select')?.value) || 0;
+    const line = qty * price;
+    const vat = line * rate / 100;
+    subtotal += line;
+    totalVAT += vat;
+    if(rate > 0) {
+      vatGroups[rate] = (vatGroups[rate]||0) + vat;
+    }
+    const totEl = row.querySelector('.line-total');
+    if(totEl) totEl.textContent = currency + line.toFixed(2);
+  });
+  const grand = subtotal + totalVAT;
+  const vatRows = Object.entries(vatGroups).map(([r,v]) =>
+    `<div class="totals-row"><span class="totals-label">VAT ${r}%</span><span class="totals-value">${currency}${v.toFixed(2)}</span></div>`
+  ).join('');
+  document.getElementById('invoiceTotals').innerHTML = `
+    <div class="totals-row"><span class="totals-label">Subtotal (excl. VAT)</span><span class="totals-value">${currency}${subtotal.toFixed(2)}</span></div>
+    ${vatRows}
+    <div class="totals-row grand-total"><span>Total Due</span><span>${currency}${grand.toFixed(2)}</span></div>`;
+}
+
+function prefillInvoice() {
+  if(selectedCountry) {
+    document.getElementById('invCountry').value = selectedCountry;
+    updateInvVatRates();
+  }
+}
+
+function generatePreview() {
+  const seller = document.getElementById('sellerName').value || 'Your Company';
+  const buyer = document.getElementById('buyerName').value || 'Client Name';
+  const invNum = document.getElementById('invNumber').value;
+  const invDate = document.getElementById('invDate').value;
+  const invDue = document.getElementById('invDue').value;
+  const currency = document.getElementById('invCurrency').value;
+  const notes = document.getElementById('invNotes').value;
+  let rows = '', subtotal = 0, totalVAT = 0;
+  document.querySelectorAll('.line-item-row').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const desc = inputs[0]?.value || 'Service';
+    const qty = parseFloat(inputs[1]?.value) || 0;
+    const price = parseFloat(inputs[2]?.value) || 0;
+    const rate = parseFloat(row.querySelector('select')?.value) || 0;
+    const line = qty * price;
+    const vat = line * rate / 100;
+    subtotal += line; totalVAT += vat;
+    if(qty > 0 && price > 0) {
+      rows += `<tr><td>${desc}</td><td>${qty}</td><td>${currency}${price.toFixed(2)}</td><td>${rate}%</td><td>${currency}${(line+vat).toFixed(2)}</td></tr>`;
+    }
+  });
+  const grand = subtotal + totalVAT;
+  const preview = document.getElementById('invoicePreview');
+  preview.className = 'preview-invoice show';
+  preview.innerHTML = `
+    <div class="invoice-header-row">
+      <div>
+        <div class="invoice-company-name">${seller}</div>
+        <div style="font-size:13px;color:var(--muted);">${document.getElementById('sellerAddress').value||''}</div>
+        <div style="font-size:13px;color:var(--muted);">${document.getElementById('sellerEmail').value||''}</div>
+        ${document.getElementById('sellerVAT').value ? `<div style="font-size:13px;color:var(--muted);">VAT: ${document.getElementById('sellerVAT').value}</div>` : ''}
+      </div>
+      <div class="invoice-meta">
+        <div><strong>Invoice #</strong> ${invNum}</div>
+        <div><strong>Date:</strong> ${invDate}</div>
+        <div><strong>Due:</strong> ${invDue}</div>
+      </div>
+    </div>
+    <div class="invoice-title-tag">INVOICE</div>
+    <div class="invoice-parties">
+      <div>
+        <div class="party-label">From</div>
+        <div class="party-name">${seller}</div>
+        <div class="party-detail">${document.getElementById('sellerAddress').value||''}</div>
+      </div>
+      <div>
+        <div class="party-label">Bill To</div>
+        <div class="party-name">${buyer}</div>
+        <div class="party-detail">${document.getElementById('buyerAddress').value||''}</div>
+        ${document.getElementById('buyerVAT').value ? `<div class="party-detail">VAT: ${document.getElementById('buyerVAT').value}</div>` : ''}
+      </div>
+    </div>
+    <table class="invoice-table">
+      <thead><tr><th>Description</th><th>Qty</th><th>Unit Price</th><th>VAT</th><th>Total</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="invoice-totals-preview">
+      <table>
+        <tr><td style="color:var(--muted)">Subtotal</td><td>${currency}${subtotal.toFixed(2)}</td></tr>
+        <tr><td style="color:var(--muted)">Total VAT</td><td>${currency}${totalVAT.toFixed(2)}</td></tr>
+        <tr class="invoice-grand-total"><td>Total Due</td><td>${currency}${grand.toFixed(2)}</td></tr>
+      </table>
+    </div>
+    ${notes ? `<div class="info-box" style="margin-top:24px;"><span class="info-icon">📝</span><p>${notes}</p></div>` : ''}
+    <div class="invoice-footer">Generated by VATCalc — Free Global VAT & Sales Tax Calculator | 150+ Countries & Invoice Generator</div>`;
+  preview.scrollIntoView({behavior:'smooth'});
+}
+
+function printInvoice() {
+  generatePreview();
+  setTimeout(() => window.print(), 300);
+}
+
+function shareInvoice() {
+  const data = {
+    seller: document.getElementById('sellerName').value,
+    buyer: document.getElementById('buyerName').value,
+    invNum: document.getElementById('invNumber').value,
+    country: document.getElementById('invCountry').value,
+  };
+  const str = btoa(JSON.stringify(data));
+  const url = window.location.href.split('?')[0] + '?inv=' + str;
+  navigator.clipboard.writeText(url).then(() => {
+    alert('Invoice link copied to clipboard!\n\nShare this link with your client to view the invoice.');
+  }).catch(() => {
+    prompt('Copy this link:', url);
+  });
+}
+
+function resetInvoice() {
+  if(confirm('Reset the entire invoice? This cannot be undone.')) {
+    document.getElementById('sellerName').value='';
+    document.getElementById('buyerName').value='';
+    document.getElementById('sellerEmail').value='';
+    document.getElementById('buyerEmail').value='';
+    document.getElementById('sellerVAT').value='';
+    document.getElementById('buyerVAT').value='';
+    document.getElementById('sellerAddress').value='';
+    document.getElementById('buyerAddress').value='';
+    document.getElementById('invNotes').value='';
+    document.getElementById('lineItems').innerHTML='';
+    lineItemCount = 0;
+    addLineItem();
+    document.getElementById('invoicePreview').className = 'preview-invoice';
+    setDefaultDates();
+  }
+}
+
+// ===================== FAQ =====================
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('show');
+  document.querySelectorAll('.faq-a').forEach(a=>a.classList.remove('show'));
+  document.querySelectorAll('.faq-q').forEach(q=>q.classList.remove('open'));
+  if(!isOpen) { ans.classList.add('show'); btn.classList.add('open'); }
+}
+</script>
+</body>
+</html>

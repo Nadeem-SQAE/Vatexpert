@@ -1,0 +1,22 @@
+[[redirects]]
+  from = "/calculator"
+  to = "/vat-calculator.html"
+  status = 301
+
+[[redirects]]
+  from = "/blog/index"
+  to = "/blog.html"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

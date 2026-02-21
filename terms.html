@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — VATCalc</title>
+<meta name="description" content="VATCalc Terms of Service. Read our terms before using the free VAT calculator and invoice generator.">
+<link rel="canonical" href="https://vatcalc.net/terms.html">
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0057FF;--primary-dark:#0040CC;--primary-light:#EBF1FF;--accent:#00C896;--accent-light:#E6FBF5;--dark:#0A0F1E;--text:#1A2340;--muted:#6B7A99;--border:#E2E8F4;--bg:#F7F9FE;--white:#ffffff;--shadow-sm:0 2px 8px rgba(0,87,255,0.08);--shadow-md:0 8px 32px rgba(0,87,255,0.12);--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1A2340;font-size:15px;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;}
+.nav-links{display:flex;gap:8px;align-items:center;}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary);}
+.nav-cta{background:var(--primary);color:white!important;padding:9px 18px!important;border-radius:9px!important;box-shadow:0 3px 10px rgba(0,87,255,0.25);}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:#1A2340;border-radius:2px;}
+@media(max-width:680px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px;box-shadow:var(--shadow-md);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+.page-hero{background:linear-gradient(135deg,#0057FF,#0040CC);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);border-radius:50%;}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;color:white;margin-bottom:10px;position:relative;z-index:1;letter-spacing:-1px;}
+.page-hero p{color:rgba(255,255,255,0.8);font-size:16px;max-width:520px;margin:0 auto;position:relative;z-index:1;}
+.main{max-width:900px;margin:0 auto;padding:52px 20px 80px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin:28px 0 10px;}
+h2:first-child{margin-top:0;}
+h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin:20px 0 8px;}
+p{margin-bottom:14px;color:#1A2340;line-height:1.75;}
+ul,ol{padding-left:22px;margin-bottom:14px;}
+li{margin-bottom:6px;line-height:1.7;color:#1A2340;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:#1A2340;background:var(--white);transition:border-color 0.2s;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,87,255,0.1);}
+.field textarea{resize:vertical;min-height:120px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--primary);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;transition:all 0.2s;text-decoration:none;box-shadow:0 4px 14px rgba(0,87,255,0.3);}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.info-box{background:var(--accent-light);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;display:flex;gap:12px;}
+.info-box .icon{font-size:18px;flex-shrink:0;}
+.info-box p{margin:0;font-size:14px;color:#0A7A5A;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}}
+.tag{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;margin-top:0;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.4);}
+.footer-links a:hover{color:white;}
+.last-updated{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;font-size:13px;color:var(--muted);margin-bottom:24px;display:inline-flex;align-items:center;gap:6px;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-icon">%</div>VATCalc</a>
+    <div class="nav-links" id="navLinks"><a href="/" class="active">Home</a>
+<a href="/vat-calculator.html" class="active">Calculator</a>
+<a href="/blog.html">Blog</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+<a href="/vat-calculator.html" class="nav-cta">Try Calculator →</a></div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="page-hero">
+  <h1>Terms of Service</h1>
+  <p>Please read these terms before using VATCalc.</p>
+</div>
+<div class="main">
+<div class="last-updated">📅 Last Updated: January 15, 2025</div>
+<div class="card">
+<div class="tag">Legal</div>
+<h2>Terms of Service</h2>
+<p>These Terms of Service ("Terms") govern your use of the VATCalc website located at vatcalc.net ("Service") operated by VATCalc ("us", "we", "our"). Please read these Terms carefully before using our Service.</p>
+<p>By accessing or using VATCalc, you agree to be bound by these Terms. If you disagree with any part of the Terms, please do not use our Service.</p>
+
+<h2>1. Use of Service</h2>
+<p>VATCalc provides free online VAT, GST and Sales Tax calculation tools along with an invoice generator. You may use the Service for personal and commercial purposes, subject to the restrictions in these Terms.</p>
+<h3>You agree NOT to:</h3>
+<ul>
+  <li>Use the Service for any unlawful purpose</li>
+  <li>Attempt to gain unauthorised access to any part of the Service</li>
+  <li>Use automated tools, bots, or scrapers to extract data from the Service at scale</li>
+  <li>Reproduce, copy or resell any part of the Service without our express written permission</li>
+  <li>Use the Service to transmit spam or malicious code</li>
+  <li>Interfere with or disrupt the Service or its servers</li>
+</ul>
+
+<h2>2. Accuracy of Information</h2>
+<p>VATCalc provides VAT, GST and Sales Tax information for informational purposes only. While we make every effort to keep tax rates accurate and up-to-date, we cannot guarantee that all information is complete, accurate, or current at the time of access.</p>
+<p><strong>Tax rates change frequently.</strong> We strongly recommend verifying all tax rates with your country's official tax authority before making financial or business decisions. VATCalc accepts no responsibility for errors, omissions or outdated information.</p>
+<p>The invoice generator creates template documents only. These are not certified tax documents and should be reviewed by a qualified accountant or tax professional before use for official purposes.</p>
+
+<h2>3. Disclaimer of Warranties</h2>
+<p>The Service is provided on an "AS IS" and "AS AVAILABLE" basis without any warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+<p>We do not warrant that:</p>
+<ul>
+  <li>The Service will be uninterrupted or error-free</li>
+  <li>The results obtained from use of the Service will be accurate or reliable</li>
+  <li>Any errors in the Service will be corrected</li>
+</ul>
+
+<h2>4. Limitation of Liability</h2>
+<p>To the maximum extent permitted by applicable law, VATCalc shall not be liable for any indirect, incidental, special, consequential or punitive damages, including but not limited to loss of profits, revenue, data, goodwill, or other intangible losses, resulting from:</p>
+<ul>
+  <li>Your use of or inability to use the Service</li>
+  <li>Any reliance on tax rates or calculations provided by the Service</li>
+  <li>Any errors, inaccuracies, or omissions in the content</li>
+  <li>Any interruption or cessation of the Service</li>
+</ul>
+<p>In no event shall our total liability exceed $100 USD.</p>
+
+<h2>5. Intellectual Property</h2>
+<p>The Service and its original content, features, functionality, design, code and trademarks are and will remain the exclusive property of VATCalc. You may not copy, modify, distribute, sell, or lease any part of the Service without our prior written consent.</p>
+
+<h2>6. Advertising</h2>
+<p>VATCalc is supported by advertising from Google AdSense and potentially other advertising networks. Ads are clearly displayed as advertisements. We do not endorse products or services shown in advertisements. Clicking on advertisements may take you to third-party websites over which we have no control.</p>
+
+<h2>7. Third-Party Links</h2>
+<p>Our Service may contain links to third-party websites. These links are provided for your convenience only. We have no control over the content of those sites and accept no responsibility for them or for any loss or damage that may arise from your use of them.</p>
+
+<h2>8. Privacy</h2>
+<p>Your use of the Service is also governed by our <a href="/privacy.html" style="color:var(--primary);">Privacy Policy</a>, which is incorporated into these Terms by this reference.</p>
+
+<h2>9. Modifications to Terms</h2>
+<p>We reserve the right to modify these Terms at any time. We will notify users of significant changes by updating the "Last Updated" date at the top of this page. Your continued use of the Service after changes constitutes your acceptance of the new Terms.</p>
+
+<h2>10. Termination</h2>
+<p>We reserve the right to terminate or suspend access to the Service immediately, without prior notice or liability, for any reason, including if you breach these Terms.</p>
+
+<h2>11. Governing Law</h2>
+<p>These Terms shall be governed by and construed in accordance with applicable law. Any disputes shall be resolved through binding arbitration in accordance with standard commercial arbitration rules.</p>
+
+<h2>12. Contact Us</h2>
+<p>If you have questions about these Terms, please contact us at <a href="mailto:hello@vatcalc.net" style="color:var(--primary);">hello@vatcalc.net</a> or via our <a href="/contact.html" style="color:var(--primary);">Contact page</a>.</p>
+</div>
+</div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bottom">
+      <p>© 2025 VATCalc. All rights reserved. Free VAT calculator for 150+ countries. For informational purposes only.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

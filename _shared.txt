@@ -1,0 +1,5 @@
+SHARED - just a reference file, not deployed
+NAV LINKS: Home | VAT Calculator | Blog | About | Contact
+BRAND: VATCalc.net
+EMAIL: hello@vatcalc.net
+YEAR: 2025

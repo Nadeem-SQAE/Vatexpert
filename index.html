@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VATCalc — Free VAT & Sales Tax Calculator for 150+ Countries</title>
+<meta name="description" content="Free online VAT, GST and Sales Tax calculator for 150+ countries. Includes invoice generator, product categories, B2B mode and US state sales tax rates.">
+<meta name="keywords" content="VAT calculator, sales tax calculator, GST calculator, invoice generator, VAT rates 2025">
+<link rel="canonical" href="https://vatcalc.net/">
+
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#0057FF;--primary-dark:#0040CC;--primary-light:#EBF1FF;--accent:#00C896;--accent-light:#E6FBF5;--dark:#0A0F1E;--text:#1A2340;--muted:#6B7A99;--border:#E2E8F4;--bg:#F7F9FE;--white:#ffffff;--shadow-sm:0 2px 8px rgba(0,87,255,0.08);--shadow-md:0 8px 32px rgba(0,87,255,0.12);--radius:16px;--radius-sm:10px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:#1A2340;font-size:15px;line-height:1.6;}
+a{text-decoration:none;color:inherit;}
+nav{background:var(--white);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm);}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.logo-icon{width:36px;height:36px;background:var(--primary);border-radius:10px;display:flex;align-items:center;justify-content:center;color:white;font-size:16px;}
+.nav-links{display:flex;gap:8px;align-items:center;}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;font-weight:500;color:var(--muted);transition:all 0.2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--primary-light);color:var(--primary);}
+.nav-cta{background:var(--primary);color:white!important;padding:9px 18px!important;border-radius:9px!important;box-shadow:0 3px 10px rgba(0,87,255,0.25);}
+.hamburger{display:none;flex-direction:column;gap:4px;background:none;border:none;cursor:pointer;padding:4px;}
+.hamburger span{width:22px;height:2px;background:#1A2340;border-radius:2px;}
+@media(max-width:680px){.nav-links{display:none;position:absolute;top:64px;left:0;right:0;background:white;border-bottom:1px solid var(--border);flex-direction:column;padding:12px;gap:4px;box-shadow:var(--shadow-md);}.nav-links.open{display:flex;}.hamburger{display:flex;}}
+.page-hero{background:linear-gradient(135deg,#0057FF,#0040CC);padding:52px 24px 48px;text-align:center;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;top:-50%;left:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);border-radius:50%;}
+.page-hero h1{font-family:'Syne',sans-serif;font-size:clamp(24px,4vw,40px);font-weight:800;color:white;margin-bottom:10px;position:relative;z-index:1;letter-spacing:-1px;}
+.page-hero p{color:rgba(255,255,255,0.8);font-size:16px;max-width:520px;margin:0 auto;position:relative;z-index:1;}
+.main{max-width:900px;margin:0 auto;padding:52px 20px 80px;}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow-sm);margin-bottom:24px;}
+h2{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--dark);margin:28px 0 10px;}
+h2:first-child{margin-top:0;}
+h3{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--dark);margin:20px 0 8px;}
+p{margin-bottom:14px;color:#1A2340;line-height:1.75;}
+ul,ol{padding-left:22px;margin-bottom:14px;}
+li{margin-bottom:6px;line-height:1.7;color:#1A2340;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.3px;}
+.field input,.field textarea,.field select{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:15px;color:#1A2340;background:var(--white);transition:border-color 0.2s;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,87,255,0.1);}
+.field textarea{resize:vertical;min-height:120px;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;background:var(--primary);color:white;border:none;border-radius:var(--radius-sm);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;transition:all 0.2s;text-decoration:none;box-shadow:0 4px 14px rgba(0,87,255,0.3);}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);}
+.info-box{background:var(--accent-light);border:1px solid rgba(0,200,150,0.2);border-radius:var(--radius-sm);padding:16px 20px;margin:16px 0;display:flex;gap:12px;}
+.info-box .icon{font-size:18px;flex-shrink:0;}
+.info-box p{margin:0;font-size:14px;color:#0A7A5A;}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}}
+.tag{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:600;padding:4px 12px;border-radius:20px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px;margin-top:0;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:12px;}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;color:rgba(255,255,255,0.4);}
+.footer-links a:hover{color:white;}
+.last-updated{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px;font-size:13px;color:var(--muted);margin-bottom:24px;display:inline-flex;align-items:center;gap:6px;}
+</style>
+<style>
+.hero{background:linear-gradient(135deg,#0057FF 0%,#0040CC 50%,#002899 100%);padding:80px 24px 72px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-50%;left:-20%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,255,255,0.06),transparent 70%);border-radius:50%;}
+.hero::after{content:'';position:absolute;bottom:-30%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(0,200,150,0.15),transparent 70%);border-radius:50%;}
+.hero h1{font-family:'Syne',sans-serif;font-size:clamp(28px,5vw,52px);font-weight:800;color:white;margin-bottom:16px;position:relative;z-index:1;letter-spacing:-1.5px;line-height:1.1;}
+.hero h1 span{color:#7DFFCB;}
+.hero p{color:rgba(255,255,255,0.82);font-size:17px;max-width:560px;margin:0 auto 32px;position:relative;z-index:1;font-weight:300;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-hero-main{display:inline-flex;align-items:center;gap:8px;padding:15px 32px;background:white;color:var(--primary);font-weight:700;border-radius:12px;font-size:16px;transition:all 0.2s;font-family:'DM Sans',sans-serif;border:none;cursor:pointer;}
+.btn-hero-main:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,0.2);}
+.btn-hero-ghost{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;background:rgba(255,255,255,0.12);color:white;border:1px solid rgba(255,255,255,0.25);border-radius:12px;font-size:16px;backdrop-filter:blur(10px);transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.btn-hero-ghost:hover{background:rgba(255,255,255,0.22);}
+.stats-row{display:flex;gap:40px;justify-content:center;margin-top:48px;position:relative;z-index:1;flex-wrap:wrap;}
+.stat{text-align:center;}
+.stat-n{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:white;}
+.stat-l{font-size:12px;color:rgba(255,255,255,0.55);text-transform:uppercase;letter-spacing:0.5px;margin-top:2px;}
+.site-main{max-width:1100px;margin:0 auto;padding:64px 20px 80px;}
+.sec-tag{display:inline-block;background:var(--primary-light);color:var(--primary);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+.sec-title{font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.5px;margin-bottom:8px;}
+.sec-sub{color:var(--muted);font-size:15px;margin-bottom:40px;}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-bottom:64px;}
+.tool-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);transition:all 0.2s;display:flex;flex-direction:column;gap:12px;}
+.tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--primary);}
+.t-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:4px;}
+.bg-blue{background:var(--primary-light);}
+.bg-green{background:var(--accent-light);}
+.bg-orange{background:#FFF4E6;}
+.bg-purple{background:#F3EFFF;}
+.t-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--dark);}
+.t-desc{font-size:14px;color:var(--muted);line-height:1.6;}
+.t-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.t-tag{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;color:var(--muted);}
+.t-link{display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-weight:500;font-size:14px;margin-top:auto;transition:gap 0.2s;}
+.t-link:hover{gap:10px;}
+.feature-banner{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-radius:var(--radius);padding:44px;color:white;margin-bottom:64px;display:grid;grid-template-columns:1fr 200px;gap:32px;align-items:center;}
+@media(max-width:620px){.feature-banner{grid-template-columns:1fr;}}
+.feature-banner h2{font-family:'Syne',sans-serif;font-size:clamp(20px,3vw,28px);font-weight:800;margin-bottom:10px;}
+.feature-banner p{opacity:0.82;font-size:15px;margin-bottom:20px;}
+.feature-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+.feature-pill{background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.2);padding:4px 12px;border-radius:20px;font-size:12px;}
+.btn-banner{background:white;color:var(--primary);padding:14px 28px;border-radius:10px;font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.btn-banner:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+.rate-visual{background:rgba(255,255,255,0.1);border-radius:12px;padding:24px;text-align:center;}
+.rate-visual .big{font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#7DFFCB;}
+.rate-visual .label{font-size:12px;opacity:0.6;margin-top:4px;}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-bottom:64px;}
+.step-c{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);}
+.step-n{width:44px;height:44px;background:var(--primary);color:white;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:20px;margin-bottom:16px;}
+.step-c h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:8px;color:var(--dark);}
+.step-c p{font-size:13px;color:var(--muted);line-height:1.6;}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:64px;}
+.why-c{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-sm);}
+.why-ic{font-size:28px;margin-bottom:12px;}
+.why-c h3{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px;color:var(--dark);}
+.why-c p{font-size:13px;color:var(--muted);line-height:1.6;}
+.countries-box{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow-sm);margin-bottom:64px;}
+.countries-box h3{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:16px;color:var(--dark);}
+.c-list{display:flex;flex-wrap:wrap;gap:8px;}
+.c-badge{background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;display:flex;align-items:center;gap:5px;cursor:default;transition:all 0.2s;}
+.c-badge:hover{border-color:var(--primary);background:var(--primary-light);color:var(--primary);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:24px;margin-bottom:64px;}
+.blog-c{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:all 0.2s;}
+.blog-c:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.blog-img{height:130px;display:flex;align-items:center;justify-content:center;font-size:50px;}
+.bg-b{background:var(--primary-light);}
+.bg-g{background:var(--accent-light);}
+.bg-o{background:#FFF4E6;}
+.blog-body{padding:20px;}
+.blog-cat{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--primary);margin-bottom:6px;}
+.blog-t{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:var(--dark);margin-bottom:7px;line-height:1.3;}
+.blog-ex{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:12px;}
+.blog-meta{font-size:12px;color:var(--muted);}
+.site-footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:56px 24px 32px;}
+.footer-inner{max-width:1100px;margin:0 auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr;gap:24px;}}
+@media(max-width:480px){.footer-grid{grid-template-columns:1fr;}}
+.f-brand p{font-size:13px;line-height:1.7;max-width:260px;margin-top:10px;}
+.f-col h4{font-family:'Syne',sans-serif;color:white;font-size:14px;font-weight:700;margin-bottom:14px;}
+.f-col a{display:block;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:8px;transition:color 0.2s;}
+.f-col a:hover{color:white;}
+.footer-bot{border-top:1px solid rgba(255,255,255,0.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;}
+.f-links{display:flex;gap:20px;flex-wrap:wrap;}
+.f-links a{font-size:12px;color:rgba(255,255,255,0.4);}
+.f-links a:hover{color:white;}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo"><div class="logo-icon">%</div>VATCalc</a>
+    <div class="nav-links" id="navLinks"><a href="/" class="active">Home</a>
+<a href="/vat-calculator.html" class="active">Calculator</a>
+<a href="/blog.html">Blog</a>
+<a href="/about.html">About</a>
+<a href="/contact.html">Contact</a>
+<a href="/vat-calculator.html" class="nav-cta">Try Calculator →</a></div>
+    <button class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<section class="hero">
+  <h1>The Free VAT Calculator<br>for <span>150+ Countries</span></h1>
+  <p>Calculate VAT, GST and Sales Tax instantly. Built for freelancers, businesses and accountants worldwide.</p>
+  <div class="hero-btns">
+    <a href="/vat-calculator.html" class="btn-hero-main">🧮 Open Calculator</a>
+    <a href="/blog.html" class="btn-hero-ghost">📚 Read VAT Guide</a>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n">150+</div><div class="stat-l">Countries</div></div>
+    <div class="stat"><div class="stat-n">13</div><div class="stat-l">Categories</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free</div></div>
+    <div class="stat"><div class="stat-n">0</div><div class="stat-l">Signup Needed</div></div>
+  </div>
+</section>
+
+<div class="site-main">
+
+  <div class="feature-banner">
+    <div>
+      <h2>⚡ VAT Calculator + Invoice Generator</h2>
+      <p>The most complete free VAT tool online. Every country, every product category, B2B reverse charge, and professional invoices.</p>
+      <div class="feature-pills">
+        <span class="feature-pill">🌍 150+ Countries</span>
+        <span class="feature-pill">📂 Product Categories</span>
+        <span class="feature-pill">🏢 B2B &amp; B2C Mode</span>
+        <span class="feature-pill">🧾 Invoice Generator</span>
+        <span class="feature-pill">🖨️ Print &amp; Share</span>
+      </div>
+      <a href="/vat-calculator.html" class="btn-banner">Open Free Calculator →</a>
+    </div>
+    <div class="rate-visual">
+      <div class="big">21%</div>
+      <div class="label">EU Standard VAT</div>
+    </div>
+  </div>
+
+  <div class="sec-tag">Free Tools</div>
+  <h2 class="sec-title" style="font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.5px;">All Calculator Tools</h2>
+  <p class="sec-sub">Professional-grade tax tools. No registration. No cost. Ever.</p>
+
+  <div class="tools-grid">
+    <div class="tool-card">
+      <div class="t-icon bg-blue">🧮</div>
+      <div class="t-title">VAT Calculator</div>
+      <div class="t-desc">Add or remove VAT from any amount. Supports all reduced rates, zero rates and country-specific exceptions.</div>
+      <div class="t-tags"><span class="t-tag">150+ Countries</span><span class="t-tag">All Rates</span><span class="t-tag">Instant</span></div>
+      <a href="/vat-calculator.html" class="t-link">Use Calculator →</a>
+    </div>
+    <div class="tool-card">
+      <div class="t-icon bg-green">📂</div>
+      <div class="t-title">VAT by Product Category</div>
+      <div class="t-desc">Find the correct VAT rate for any product. Food, medicine, electronics — every category with country-specific rates.</div>
+      <div class="t-tags"><span class="t-tag">13 Categories</span><span class="t-tag">Product Search</span><span class="t-tag">Reduced Rates</span></div>
+      <a href="/vat-calculator.html" class="t-link">Find Rate →</a>
+    </div>
+    <div class="tool-card">
+      <div class="t-icon bg-orange">🧾</div>
+      <div class="t-title">VAT Invoice Generator</div>
+      <div class="t-desc">Create professional invoices with correct VAT. Add multiple line items, print or share via link — all free.</div>
+      <div class="t-tags"><span class="t-tag">Print Ready</span><span class="t-tag">Multi-item</span><span class="t-tag">14 Currencies</span></div>
+      <a href="/vat-calculator.html" class="t-link">Create Invoice →</a>
+    </div>
+    <div class="tool-card">
+      <div class="t-icon bg-purple">🇺🇸</div>
+      <div class="t-title">US Sales Tax Calculator</div>
+      <div class="t-desc">Calculate Sales Tax for all 50 US states. Includes combined state and local rates. Explains B2B resale exemptions.</div>
+      <div class="t-tags"><span class="t-tag">All 50 States</span><span class="t-tag">Local Rates</span><span class="t-tag">B2B Exempt</span></div>
+      <a href="/vat-calculator.html" class="t-link">Calculate →</a>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:64px;">
+    <div class="sec-tag">How It Works</div>
+    <h2 class="sec-title" style="font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.5px;">Calculate VAT in 3 Simple Steps</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step-c"><div class="step-n">1</div><h3>Choose Your Country</h3><p>Select from 150+ countries. VAT rates load automatically including all reduced and zero rates.</p></div>
+    <div class="step-c"><div class="step-n">2</div><h3>Enter Amount &amp; Category</h3><p>Type in your amount and optionally select a product category to apply the exact correct rate.</p></div>
+    <div class="step-c"><div class="step-n">3</div><h3>Get Results Instantly</h3><p>See net amount, VAT amount, and total. Generate a printable invoice or copy the result.</p></div>
+    <div class="step-c"><div class="step-n">4</div><h3>Create Your Invoice</h3><p>Add seller and buyer details, multiple line items, and generate a professional invoice with print and share options.</p></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:32px;">
+    <div class="sec-tag">Why VATCalc</div>
+    <h2 class="sec-title" style="font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.5px;">Built for Real Businesses</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-c"><div class="why-ic">🎯</div><h3>Country-Specific Rules</h3><p>Every reduced rate, zero rate and special exception — exactly as your tax authority requires.</p></div>
+    <div class="why-c"><div class="why-ic">📂</div><h3>Product Categories</h3><p>Food, medicine and books often have lower VAT rates. Our system ensures you always apply the right rate.</p></div>
+    <div class="why-c"><div class="why-ic">🏢</div><h3>B2B &amp; B2C Modes</h3><p>Businesses get VAT reverse charge guidance. Individuals get simple, clean results.</p></div>
+    <div class="why-c"><div class="why-ic">📱</div><h3>Mobile Friendly</h3><p>Fully responsive. Works perfectly on phones, tablets and desktops.</p></div>
+    <div class="why-c"><div class="why-ic">🔒</div><h3>No Data Stored</h3><p>Your calculations stay in your browser. We never store your amounts or invoice data.</p></div>
+    <div class="why-c"><div class="why-ic">🔄</div><h3>Always Updated</h3><p>We monitor VAT rate changes globally and update rates when countries change their tax laws.</p></div>
+  </div>
+
+  <div class="countries-box">
+    <h3>Supported Countries (150+)</h3>
+    <div class="c-list">
+      <span class="c-badge">🇺🇸 USA</span><span class="c-badge">🇬🇧 UK</span><span class="c-badge">🇩🇪 Germany</span>
+      <span class="c-badge">🇫🇷 France</span><span class="c-badge">🇪🇸 Spain</span><span class="c-badge">🇮🇹 Italy</span>
+      <span class="c-badge">🇳🇱 Netherlands</span><span class="c-badge">🇵🇱 Poland</span><span class="c-badge">🇧🇷 Brazil</span>
+      <span class="c-badge">🇲🇽 Mexico</span><span class="c-badge">🇸🇦 Saudi Arabia</span><span class="c-badge">🇦🇪 UAE</span>
+      <span class="c-badge">🇮🇳 India</span><span class="c-badge">🇨🇳 China</span><span class="c-badge">🇯🇵 Japan</span>
+      <span class="c-badge">🇦🇺 Australia</span><span class="c-badge">🇨🇦 Canada</span><span class="c-badge">🇷🇺 Russia</span>
+      <span class="c-badge">🇹🇷 Turkey</span><span class="c-badge">🇿🇦 South Africa</span><span class="c-badge">🇳🇬 Nigeria</span>
+      <span class="c-badge">🇦🇷 Argentina</span><span class="c-badge">🇨🇴 Colombia</span><span class="c-badge">🇵🇰 Pakistan</span>
+      <span class="c-badge">🇮🇩 Indonesia</span><span class="c-badge">🇸🇬 Singapore</span><span class="c-badge">🇰🇷 South Korea</span>
+      <span class="c-badge">🇸🇪 Sweden</span><span class="c-badge">🇳🇴 Norway</span><span class="c-badge">🇨🇭 Switzerland</span>
+      <span class="c-badge">+ 120 more →</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:32px;">
+    <div class="sec-tag">VAT Guides</div>
+    <h2 class="sec-title" style="font-family:'Syne',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--dark);letter-spacing:-0.5px;">Learn About VAT</h2>
+    <p class="sec-sub">Free guides to help you understand VAT rules in every country.</p>
+  </div>
+  <div class="blog-grid">
+    <a href="/blog/what-is-vat.html" class="blog-c">
+      <div class="blog-img bg-b">📘</div>
+      <div class="blog-body">
+        <div class="blog-cat">VAT Basics</div>
+        <div class="blog-t">What is VAT? A Complete Beginner's Guide</div>
+        <div class="blog-ex">Everything you need to know about Value Added Tax — how it works, who pays it, and how to calculate it correctly.</div>
+        <div class="blog-meta">📅 January 2025 · 5 min read</div>
+      </div>
+    </a>
+    <a href="/blog/eu-vat-rates.html" class="blog-c">
+      <div class="blog-img bg-g">🇪🇺</div>
+      <div class="blog-body">
+        <div class="blog-cat">EU VAT</div>
+        <div class="blog-t">Complete EU VAT Rates 2025 — All 27 Countries</div>
+        <div class="blog-ex">Standard, reduced and zero VAT rates for every EU member state. Updated for 2025 with recent changes.</div>
+        <div class="blog-meta">📅 January 2025 · 8 min read</div>
+      </div>
+    </a>
+    <a href="/blog/us-sales-tax.html" class="blog-c">
+      <div class="blog-img bg-o">🇺🇸</div>
+      <div class="blog-body">
+        <div class="blog-cat">US Sales Tax</div>
+        <div class="blog-t">US Sales Tax vs VAT — Key Differences Explained</div>
+        <div class="blog-ex">Why the US uses Sales Tax instead of VAT, how it varies by state, and what businesses need to know.</div>
+        <div class="blog-meta">📅 February 2025 · 6 min read</div>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <div class="logo" style="color:white;">
+          <div class="logo-icon">%</div>VATCalc
+        </div>
+        <p>Free VAT, GST and Sales Tax calculator for 150+ countries. Built for freelancers, small businesses and accountants worldwide.</p>
+      </div>
+      <div class="f-col"><h4>Tools</h4>
+        <a href="/vat-calculator.html">VAT Calculator</a>
+        <a href="/vat-calculator.html">Invoice Generator</a>
+        <a href="/vat-calculator.html">By Product Category</a>
+        <a href="/vat-calculator.html">US Sales Tax</a>
+      </div>
+      <div class="f-col"><h4>Guides</h4>
+        <a href="/blog/what-is-vat.html">What is VAT?</a>
+        <a href="/blog/eu-vat-rates.html">EU VAT Rates 2025</a>
+        <a href="/blog/us-sales-tax.html">US Sales Tax Guide</a>
+        <a href="/blog.html">All Articles</a>
+      </div>
+      <div class="f-col"><h4>Company</h4>
+        <a href="/about.html">About Us</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/disclaimer.html">Disclaimer</a>
+        <a href="/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+    <div class="footer-bot">
+      <p>© 2025 VATCalc. All rights reserved. For informational purposes only. Always verify rates with official tax authorities.</p>
+      <div class="f-links">
+        <a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a>
+        <a href="/disclaimer.html">Disclaimer</a><a href="/sitemap.html">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+</body></html>
