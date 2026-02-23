@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://vatcalc.net/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://vatcalc.net/vat-calculator.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
-  <url><loc>https://vatcalc.net/about.html</loc><priority>0.6</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/contact.html</loc><priority>0.6</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/privacy.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/terms.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/disclaimer.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/sitemap.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/what-is-vat.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/eu-vat-rates.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/us-sales-tax.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/how-to-calculate-vat.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/vat-invoice-guide.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
-  <url><loc>https://vatcalc.net/blog/vat-reverse-charge.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/</loc><priority>1.0</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/vat-calculator.html</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/about.html</loc><priority>0.6</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/contact.html</loc><priority>0.6</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/privacy.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/terms.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/disclaimer.html</loc><priority>0.4</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/sitemap.html</loc><priority>0.3</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/what-is-vat.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/eu-vat-rates.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/us-sales-tax.html</loc><priority>0.8</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/how-to-calculate-vat.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/vat-invoice-guide.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
+  <url><loc>https://vatexpert.netlify.app/blog/vat-reverse-charge.html</loc><priority>0.7</priority><changefreq>yearly</changefreq></url>
 </urlset>
